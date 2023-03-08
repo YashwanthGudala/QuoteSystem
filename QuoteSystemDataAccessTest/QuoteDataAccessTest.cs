@@ -13,7 +13,8 @@ namespace QuoteSystemDataAccessTest
         static void Main(string[] args)
         {
             //Testing add quote
-            RemoveQuoteTest();
+            //RemoveQuoteTest();
+            AddQuoteTest();
             Console.ReadKey();
 
 
