@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuoteDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="QuoteDataModelStoreContainer">
+    <EntitySet Name="Quotes" EntityType="QuoteDataModel.Store.Quotes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PolicyTerms" EntityType="QuoteDataModel.Store.PolicyTerms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Prospects" EntityType="QuoteDataModel.Store.Prospects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Businesses" EntityType="QuoteDataModel.Store.Businesses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Coverages" EntityType="QuoteDataModel.Store.Coverages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Addresses" EntityType="QuoteDataModel.Store.Addresses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Agents" EntityType="QuoteDataModel.Store.Agents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CodeValueLists" EntityType="QuoteDataModel.Store.CodeValueLists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CodeValues" EntityType="QuoteDataModel.Store.CodeValues" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="QuotePolicyTerm" Association="QuoteDataModel.Store.QuotePolicyTerm">
+      <End Role="Quote" EntitySet="Quotes" />
+      <End Role="PolicyTerm" EntitySet="PolicyTerms" />
+    </AssociationSet>
+    <AssociationSet Name="QuoteProspect" Association="QuoteDataModel.Store.QuoteProspect">
+      <End Role="Quote" EntitySet="Quotes" />
+      <End Role="Prospect" EntitySet="Prospects" />
+    </AssociationSet>
+    <AssociationSet Name="ProspectBusiness" Association="QuoteDataModel.Store.ProspectBusiness">
+      <End Role="Prospect" EntitySet="Prospects" />
+      <End Role="Business" EntitySet="Businesses" />
+    </AssociationSet>
+    <AssociationSet Name="BusinessCoverage" Association="QuoteDataModel.Store.BusinessCoverage">
+      <End Role="Business" EntitySet="Businesses" />
+      <End Role="Coverage" EntitySet="Coverages" />
+    </AssociationSet>
+    <AssociationSet Name="BusinessAddress" Association="QuoteDataModel.Store.BusinessAddress">
+      <End Role="Business" EntitySet="Businesses" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="CodeValueListCodeValue" Association="QuoteDataModel.Store.CodeValueListCodeValue">
+      <End Role="CodeValueList" EntitySet="CodeValueLists" />
+      <End Role="CodeValue" EntitySet="CodeValues" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Quotes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuoteNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RiskState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Premium" Type="float" Nullable="false" />
+    <Property Name="AgentId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PolicyTerm_Id" Type="int" Nullable="false" />
+    <Property Name="Prospect_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PolicyTerms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PolicyEffectiveDate" Type="datetime" Nullable="false" />
+    <Property Name="PolicyExpiryDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prospects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganisationName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumberOfBusinessUnits" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Businesses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IndustryType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Territory" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Exposure" Type="int" Nullable="false" />
+    <Property Name="ProspectId" Type="int" Nullable="false" />
+    <Property Name="Address_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Coverages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CoverageName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Deductible" Type="int" Nullable="false" />
+    <Property Name="OccuranceLimit" Type="int" Nullable="false" />
+    <Property Name="AggregateLimit" Type="int" Nullable="false" />
+    <Property Name="CoveragePremium" Type="float" Nullable="false" />
+    <Property Name="BusinessId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Addresses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstLine" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SecondLine" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Agents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AgentId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AgentName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AgencyName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Mail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CodeValueLists">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ListName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CodeValues">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CodeValueListId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="QuotePolicyTerm">
+    <End Role="Quote" Type="QuoteDataModel.Store.Quotes" Multiplicity="*" />
+    <End Role="PolicyTerm" Type="QuoteDataModel.Store.PolicyTerms" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PolicyTerm">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="PolicyTerm_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuoteProspect">
+    <End Role="Quote" Type="QuoteDataModel.Store.Quotes" Multiplicity="*" />
+    <End Role="Prospect" Type="QuoteDataModel.Store.Prospects" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Prospect">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="Prospect_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProspectBusiness">
+    <End Role="Prospect" Type="QuoteDataModel.Store.Prospects" Multiplicity="1" />
+    <End Role="Business" Type="QuoteDataModel.Store.Businesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prospect">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Business">
+        <PropertyRef Name="ProspectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BusinessCoverage">
+    <End Role="Business" Type="QuoteDataModel.Store.Businesses" Multiplicity="1" />
+    <End Role="Coverage" Type="QuoteDataModel.Store.Coverages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Business">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Coverage">
+        <PropertyRef Name="BusinessId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BusinessAddress">
+    <End Role="Business" Type="QuoteDataModel.Store.Businesses" Multiplicity="*" />
+    <End Role="Address" Type="QuoteDataModel.Store.Addresses" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Business">
+        <PropertyRef Name="Address_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CodeValueListCodeValue">
+    <End Role="CodeValueList" Type="QuoteDataModel.Store.CodeValueLists" Multiplicity="1" />
+    <End Role="CodeValue" Type="QuoteDataModel.Store.CodeValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CodeValueList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CodeValue">
+        <PropertyRef Name="CodeValueListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="QuoteDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="QuoteDataModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Quotes" EntityType="QuoteDataModel.Quote" />
+          <EntitySet Name="PolicyTerms" EntityType="QuoteDataModel.PolicyTerm" />
+          <AssociationSet Name="QuotePolicyTerm" Association="QuoteDataModel.QuotePolicyTerm">
+            <End Role="Quote" EntitySet="Quotes" />
+            <End Role="PolicyTerm" EntitySet="PolicyTerms" />
+          </AssociationSet>
+          <EntitySet Name="Prospects" EntityType="QuoteDataModel.Prospect" />
+          <AssociationSet Name="QuoteProspect" Association="QuoteDataModel.QuoteProspect">
+            <End Role="Quote" EntitySet="Quotes" />
+            <End Role="Prospect" EntitySet="Prospects" />
+          </AssociationSet>
+          <EntitySet Name="Businesses" EntityType="QuoteDataModel.Business" />
+          <AssociationSet Name="ProspectBusiness" Association="QuoteDataModel.ProspectBusiness">
+            <End Role="Prospect" EntitySet="Prospects" />
+            <End Role="Business" EntitySet="Businesses" />
+          </AssociationSet>
+          <EntitySet Name="Coverages" EntityType="QuoteDataModel.Coverage" />
+          <AssociationSet Name="BusinessCoverage" Association="QuoteDataModel.BusinessCoverage">
+            <End Role="Business" EntitySet="Businesses" />
+            <End Role="Coverage" EntitySet="Coverages" />
+          </AssociationSet>
+          <EntitySet Name="Addresses" EntityType="QuoteDataModel.Address" />
+          <AssociationSet Name="BusinessAddress" Association="QuoteDataModel.BusinessAddress">
+            <End Role="Business" EntitySet="Businesses" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <EntitySet Name="Agents" EntityType="QuoteDataModel.Agent" />
+          <EntitySet Name="CodeValueLists" EntityType="QuoteDataModel.CodeValueList" />
+          <EntitySet Name="CodeValues" EntityType="QuoteDataModel.CodeValue" />
+          <AssociationSet Name="CodeValueListCodeValue" Association="QuoteDataModel.CodeValueListCodeValue">
+            <End Role="CodeValueList" EntitySet="CodeValueLists" />
+            <End Role="CodeValue" EntitySet="CodeValues" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteNumber" Type="String" Nullable="false" />
+          <Property Name="RiskState" Type="String" Nullable="false" />
+          <Property Name="Premium" Type="Double" Nullable="false" />
+          <Property Name="AgentId" Type="String" Nullable="false" />
+          <NavigationProperty Name="PolicyTerm" Relationship="QuoteDataModel.QuotePolicyTerm" FromRole="Quote" ToRole="PolicyTerm" />
+          <NavigationProperty Name="Prospect" Relationship="QuoteDataModel.QuoteProspect" FromRole="Quote" ToRole="Prospect" />
+        </EntityType>
+        <EntityType Name="PolicyTerm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyEffectiveDate" Type="DateTime" Nullable="false" />
+          <Property Name="PolicyExpiryDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Quote" Relationship="QuoteDataModel.QuotePolicyTerm" FromRole="PolicyTerm" ToRole="Quote" />
+        </EntityType>
+        <Association Name="QuotePolicyTerm">
+          <End Type="QuoteDataModel.Quote" Role="Quote" Multiplicity="1" />
+          <End Type="QuoteDataModel.PolicyTerm" Role="PolicyTerm" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Prospect">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrganisationName" Type="String" Nullable="false" />
+          <Property Name="Contact" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="NumberOfBusinessUnits" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Quote" Relationship="QuoteDataModel.QuoteProspect" FromRole="Prospect" ToRole="Quote" />
+          <NavigationProperty Name="Businesses" Relationship="QuoteDataModel.ProspectBusiness" FromRole="Prospect" ToRole="Business" />
+        </EntityType>
+        <Association Name="QuoteProspect">
+          <End Type="QuoteDataModel.Quote" Role="Quote" Multiplicity="1" />
+          <End Type="QuoteDataModel.Prospect" Role="Prospect" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Business">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IndustryType" Type="String" Nullable="false" />
+          <Property Name="Territory" Type="String" Nullable="false" />
+          <Property Name="Exposure" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Prospect" Relationship="QuoteDataModel.ProspectBusiness" FromRole="Business" ToRole="Prospect" />
+          <Property Name="ProspectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Coverages" Relationship="QuoteDataModel.BusinessCoverage" FromRole="Business" ToRole="Coverage" />
+          <NavigationProperty Name="Address" Relationship="QuoteDataModel.BusinessAddress" FromRole="Business" ToRole="Address" />
+        </EntityType>
+        <Association Name="ProspectBusiness">
+          <End Type="QuoteDataModel.Prospect" Role="Prospect" Multiplicity="1" />
+          <End Type="QuoteDataModel.Business" Role="Business" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prospect">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Business">
+              <PropertyRef Name="ProspectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Coverage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CoverageName" Type="String" Nullable="false" />
+          <Property Name="Deductible" Type="Int32" Nullable="false" />
+          <Property Name="OccuranceLimit" Type="Int32" Nullable="false" />
+          <Property Name="AggregateLimit" Type="Int32" Nullable="false" />
+          <Property Name="CoveragePremium" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Business" Relationship="QuoteDataModel.BusinessCoverage" FromRole="Coverage" ToRole="Business" />
+          <Property Name="BusinessId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="BusinessCoverage">
+          <End Type="QuoteDataModel.Business" Role="Business" Multiplicity="1" />
+          <End Type="QuoteDataModel.Coverage" Role="Coverage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Business">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coverage">
+              <PropertyRef Name="BusinessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstLine" Type="String" Nullable="false" />
+          <Property Name="SecondLine" Type="String" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" />
+          <Property Name="ZipCode" Type="String" Nullable="false" />
+          <NavigationProperty Name="Business" Relationship="QuoteDataModel.BusinessAddress" FromRole="Address" ToRole="Business" />
+        </EntityType>
+        <Association Name="BusinessAddress">
+          <End Type="QuoteDataModel.Business" Role="Business" Multiplicity="1" />
+          <End Type="QuoteDataModel.Address" Role="Address" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="String" Nullable="false" />
+          <Property Name="AgentName" Type="String" Nullable="false" />
+          <Property Name="AgencyName" Type="String" Nullable="false" />
+          <Property Name="Contact" Type="String" Nullable="false" />
+          <Property Name="Mail" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CodeValueList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ListName" Type="String" Nullable="false" />
+          <NavigationProperty Name="CodeValues" Relationship="QuoteDataModel.CodeValueListCodeValue" FromRole="CodeValueList" ToRole="CodeValue" />
+        </EntityType>
+        <EntityType Name="CodeValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" />
+          <NavigationProperty Name="CodeValueList" Relationship="QuoteDataModel.CodeValueListCodeValue" FromRole="CodeValue" ToRole="CodeValueList" />
+          <Property Name="CodeValueListId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="CodeValueListCodeValue">
+          <End Type="QuoteDataModel.CodeValueList" Role="CodeValueList" Multiplicity="1" />
+          <End Type="QuoteDataModel.CodeValue" Role="CodeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CodeValueList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CodeValue">
+              <PropertyRef Name="CodeValueListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QuoteDataModelStoreContainer" CdmEntityContainer="QuoteDataModelContainer">
+    <EntitySetMapping Name="Quotes">
+      <EntityTypeMapping TypeName="IsTypeOf(QuoteDataModel.Quote)">
+        <MappingFragment StoreEntitySet="Quotes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuoteNumber" ColumnName="QuoteNumber" />
+          <ScalarProperty Name="RiskState" ColumnName="RiskState" />
+          <ScalarProperty Name="Premium" ColumnName="Premium" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PolicyTerms">
+      <EntityTypeMapping TypeName="IsTypeOf(QuoteDataModel.PolicyTerm)">
+        <MappingFragment StoreEntitySet="PolicyTerms">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PolicyEffectiveDate" ColumnName="PolicyEffectiveDate" />
+          <ScalarProperty Name="PolicyExpiryDate" ColumnName="PolicyExpiryDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prospects">
+      <EntityTypeMapping TypeName="IsTypeOf(QuoteDataModel.Prospect)">
+        <MappingFragment StoreEntitySet="Prospects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrganisationName" ColumnName="OrganisationName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NumberOfBusinessUnits" ColumnName="NumberOfBusinessUnits" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Businesses">
+      <EntityTypeMapping TypeName="IsTypeOf(QuoteDataModel.Business)">
+        <MappingFragment StoreEntitySet="Businesses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IndustryType" ColumnName="IndustryType" />
+          <ScalarProperty Name="Territory" ColumnName="Territory" />
+          <ScalarProperty Name="Exposure" ColumnName="Exposure" />
+          <ScalarProperty Name="ProspectId" ColumnName="ProspectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Coverages">
+      <EntityTypeMapping TypeName="IsTypeOf(QuoteDataModel.Coverage)">
+        <MappingFragment StoreEntitySet="Coverages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CoverageName" ColumnName="CoverageName" />
+          <ScalarProperty Name="Deductible" ColumnName="Deductible" />
+          <ScalarProperty Name="OccuranceLimit" ColumnName="OccuranceLimit" />
+          <ScalarProperty Name="AggregateLimit" ColumnName="AggregateLimit" />
+          <ScalarProperty Name="CoveragePremium" ColumnName="CoveragePremium" />
+          <ScalarProperty Name="BusinessId" ColumnName="BusinessId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="IsTypeOf(QuoteDataModel.Address)">
+        <MappingFragment StoreEntitySet="Addresses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstLine" ColumnName="FirstLine" />
+          <ScalarProperty Name="SecondLine" ColumnName="SecondLine" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Agents">
+      <EntityTypeMapping TypeName="IsTypeOf(QuoteDataModel.Agent)">
+        <MappingFragment StoreEntitySet="Agents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+          <ScalarProperty Name="AgencyName" ColumnName="AgencyName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CodeValueLists">
+      <EntityTypeMapping TypeName="IsTypeOf(QuoteDataModel.CodeValueList)">
+        <MappingFragment StoreEntitySet="CodeValueLists">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ListName" ColumnName="ListName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CodeValues">
+      <EntityTypeMapping TypeName="IsTypeOf(QuoteDataModel.CodeValue)">
+        <MappingFragment StoreEntitySet="CodeValues">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="CodeValueListId" ColumnName="CodeValueListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="QuotePolicyTerm" TypeName="QuoteDataModel.QuotePolicyTerm" StoreEntitySet="Quotes">
+      <EndProperty Name="PolicyTerm">
+        <ScalarProperty Name="Id" ColumnName="PolicyTerm_Id" />
+      </EndProperty>
+      <EndProperty Name="Quote">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="QuoteProspect" TypeName="QuoteDataModel.QuoteProspect" StoreEntitySet="Quotes">
+      <EndProperty Name="Prospect">
+        <ScalarProperty Name="Id" ColumnName="Prospect_Id" />
+      </EndProperty>
+      <EndProperty Name="Quote">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BusinessAddress" TypeName="QuoteDataModel.BusinessAddress" StoreEntitySet="Businesses">
+      <EndProperty Name="Address">
+        <ScalarProperty Name="Id" ColumnName="Address_Id" />
+      </EndProperty>
+      <EndProperty Name="Business">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
