@@ -1,25 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using QuoteSystemDataModel;
-using QuoteSystemDataAccess;
 
+using QuoteSystemDataAccess;
+using QuoteSystemDataModel;
 namespace QuoteSystemDataAccessTest
 {
-    class QuoteDataAccessTest
+    class TestQuoteDataAccess
     {
-        static void Main(string[] args)
-        {
-            //Testing add quote
-            //RemoveQuoteTest();
-            AddQuoteTest();
-            Console.ReadKey();
-
-
-        }
-
         public static Quote GetSampleQuote()
         {
             Address Address = new Address()
