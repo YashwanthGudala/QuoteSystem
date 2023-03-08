@@ -13,7 +13,7 @@ namespace QuoteSystemDataAccessTest
         static void Main(string[] args)
         {
             //Testing add quote
-            AddQuoteTest();
+            RemoveQuoteTest();
             Console.ReadKey();
 
 
@@ -36,14 +36,42 @@ namespace QuoteSystemDataAccessTest
             Business business = new Business()
             {
                 IndustryType = "Hardware",
-                Territory = "001",
-                Exposure = 1000,
+                Territory = "002",
+                Exposure = 2000,
                 Address = Address,
                 Coverages = new List<Coverage>()
                 {
                      new Coverage()
                      {
-                          CoverageName="Theft",
+                          CoverageName="Fire",
+                          Deductible=10000,
+                          OccuranceLimit=50000,
+                          AggregateLimit=100000,
+                          CoveragePremium=500.0d
+
+                     }
+                }
+
+            };
+            Address Address2 = new Address()
+            {
+                FirstLine = "Toopran",
+                SecondLine = "ECIL",
+                City = "Hyd",
+                State = "telangana",
+                ZipCode = "505301",
+            };
+            Business business2 = new Business()
+            {
+                IndustryType = "Software",
+                Territory = "002",
+                Exposure = 2000,
+                Address = Address2,
+                Coverages = new List<Coverage>()
+                {
+                     new Coverage()
+                     {
+                          CoverageName="Product",
                           Deductible=10000,
                           OccuranceLimit=50000,
                           AggregateLimit=100000,
@@ -54,10 +82,11 @@ namespace QuoteSystemDataAccessTest
 
             };
             businesses.Add(business);
+            businesses.Add(business2);
 
             Prospect Prospect1 = new Prospect()
             {
-                OrganisationName = "Jarus",
+                OrganisationName = "Tata",
                 Contact = "6301736456",
                 Email = "vijay@gmail.com",
                 NumberOfBusinessUnits = 4,
@@ -72,10 +101,10 @@ namespace QuoteSystemDataAccessTest
 
             Quote quote = new Quote()
             {
-                QuoteNumber = "Q-12345",
+                QuoteNumber = "Q-567",
                 RiskState = "India",
                 Premium = 100.0d,
-                AgentId = "A123",
+                AgentId = "A124",
                 Prospect = Prospect1,
                 PolicyTerm = PolicyTerm
             };
@@ -88,6 +117,11 @@ namespace QuoteSystemDataAccessTest
             Quote quote = GetSampleQuote();
 
             QuoteSystemDataAccess.QuoteDataAccess.AddQuote(quote);
+        }
+
+        public static void RemoveQuoteTest()
+        {
+            QuoteSystemDataAccess.QuoteDataAccess.DeleteQuote("Q-567");
         }
     }
 }

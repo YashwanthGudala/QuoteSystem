@@ -20,5 +20,22 @@ namespace QuoteSystemDataAccess
 
 
         }
+
+        public static void DeleteQuote(string quotenum)
+        {
+            using (var dbContext = new QuoteDataModelContainer())
+            {
+                Quote quote = dbContext.Quotes.Where(c => c.QuoteNumber == quotenum).FirstOrDefault();
+
+                //Prospect prospect = dbContext.Prospects.Where()
+
+               dbContext.Quotes.Remove(quote);
+
+                dbContext.SaveChanges();
+            }
+
+        }
+
+
     }
 }
