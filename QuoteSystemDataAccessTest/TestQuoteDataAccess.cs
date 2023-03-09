@@ -11,7 +11,7 @@ namespace QuoteSystemDataAccessTest
         {
             Address Address = new Address()
             {
-                FirstLine = "Toopran",
+                FirstLine = "Cosmos Bank",
                 SecondLine = "ECIL",
                 City = "Hyd",
                 State = "telangana",
@@ -23,7 +23,7 @@ namespace QuoteSystemDataAccessTest
 
             Business business = new Business()
             {
-                IndustryType = "Hardware",
+                IndustryType = "AutoMobiles",
                 Territory = "002",
                 Exposure = 2000,
                 Address = Address,
@@ -51,7 +51,7 @@ namespace QuoteSystemDataAccessTest
             };
             Business business2 = new Business()
             {
-                IndustryType = "Software",
+                IndustryType = "IT",
                 Territory = "002",
                 Exposure = 2000,
                 Address = Address2,
@@ -74,10 +74,10 @@ namespace QuoteSystemDataAccessTest
 
             Prospect Prospect1 = new Prospect()
             {
-                OrganisationName = "Tata",
-                Contact = "6301736456",
+                OrganisationName = "Mahindra",
+                Contact = "7674878760",
                 Email = "vijay@gmail.com",
-                NumberOfBusinessUnits = 4,
+                NumberOfBusinessUnits = 2,
                 Businesses = businesses
             };
 
@@ -89,10 +89,10 @@ namespace QuoteSystemDataAccessTest
 
             Quote quote = new Quote()
             {
-                QuoteNumber = "Q-567",
-                RiskState = "India",
-                Premium = 100.0d,
-                AgentId = "A124",
+                QuoteNumber = "Q-2302001",
+                RiskState = "USA",
+                Premium = 500.0d,
+                AgentId = "A001",
                 Prospect = Prospect1,
                 PolicyTerm = PolicyTerm
             };
@@ -103,7 +103,7 @@ namespace QuoteSystemDataAccessTest
         {
             Address Address = new Address()
             {
-                FirstLine = "Cosmos Bank",
+                FirstLine = "Raghavendra Nagar",
                 SecondLine = "Nacharam",
                 City = "Hyd",
                 State = "TS",
@@ -115,7 +115,7 @@ namespace QuoteSystemDataAccessTest
 
             Business business = new Business()
             {
-                IndustryType = "Bakery",
+                IndustryType = "Dairy Form",
                 Territory = "001",
                 Exposure = 1000,
                 Address = Address,
@@ -123,8 +123,8 @@ namespace QuoteSystemDataAccessTest
                 {
                      new Coverage()
                      {
-                          CoverageName="Fire",
-                          Deductible=200,
+                          CoverageName="Advertising",
+                          Deductible=300,
                           OccuranceLimit=50000,
                           AggregateLimit=100000,
                           CoveragePremium=500.0d
@@ -132,7 +132,7 @@ namespace QuoteSystemDataAccessTest
                      } ,
                      new Coverage()
                      {
-                          CoverageName="Floods",
+                          CoverageName="Product",
                           Deductible=300,
                           OccuranceLimit=50000,
                           AggregateLimit=100000,
@@ -144,7 +144,7 @@ namespace QuoteSystemDataAccessTest
             };
             Address Address2 = new Address()
             {
-                FirstLine = "Uppal",
+                FirstLine = "NGRI",
                 SecondLine = "Hyd",
                 City = "Hyd",
                 State = "TS",
@@ -152,15 +152,15 @@ namespace QuoteSystemDataAccessTest
             };
             Business business2 = new Business()
             {
-                IndustryType = "Restaurant",
+                IndustryType = "Wholesale Shop",
                 Territory = "003",
-                Exposure = 2000,
+                Exposure = 3000,
                 Address = Address2,
                 Coverages = new List<Coverage>()
                 {
                      new Coverage()
                      {
-                          CoverageName="Product",
+                          CoverageName="Advertising",
                           Deductible=350,
                           OccuranceLimit=50000,
                           AggregateLimit=100000,
@@ -169,7 +169,7 @@ namespace QuoteSystemDataAccessTest
                      } ,
                      new Coverage()
                      {
-                          CoverageName="Floods",
+                          CoverageName="Product",
                           Deductible=250,
                           OccuranceLimit=50000,
                           AggregateLimit=100000,
@@ -184,7 +184,7 @@ namespace QuoteSystemDataAccessTest
 
             Prospect Prospect1 = new Prospect()
             {
-                OrganisationName = "Yash Group",
+                OrganisationName = "Nani Group",
                 Contact = "7674878760",
                 Email = "yash@gmail.com",
                 NumberOfBusinessUnits = 2,
@@ -199,10 +199,10 @@ namespace QuoteSystemDataAccessTest
 
             Quote quote = new Quote()
             {
-                QuoteNumber = "Q-12345",
-                RiskState = "USA",
-                Premium = 500.0d,
-                AgentId = "A501",
+                QuoteNumber = "Q-2302001",
+                RiskState = "France",
+                Premium = 600.0d,
+                AgentId = "A001",
                 Prospect = Prospect1,
                 PolicyTerm = PolicyTerm
             };
@@ -219,7 +219,7 @@ namespace QuoteSystemDataAccessTest
 
         public static void RemoveQuoteTest()
         {
-            QuoteSystemDataAccess.QuoteDataAccess.DeleteQuote("Q-567");
+            QuoteSystemDataAccess.QuoteDataAccess.DeleteQuote("Q-2302001");
         }
         public static void UpdateQuoteTest()
         {
