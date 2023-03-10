@@ -9,7 +9,7 @@ namespace MetadataDataAccess
 {
     public class CodeValueDataAccess
     {
-        public static string AddCodeValueToList(string ListName ,CodeValue codeValue)
+        public static string AddCodeValue(string ListName ,CodeValue codeValue)
         {
 
 
@@ -38,7 +38,7 @@ namespace MetadataDataAccess
 
         }
 
-        public static string AddNewCodeValueList(string listName)
+        public static string AddCodeValueList(string listName)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace MetadataDataAccess
             }
             return "Successfully Created";
         }
-        public static List<CodeValueList> ViewAllCodeValueLists()
+        public static List<CodeValueList> GetAllCodeValueLists()
         {
             List<CodeValueList> codeValueLists;
             try

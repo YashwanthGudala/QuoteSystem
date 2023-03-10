@@ -10,141 +10,215 @@ namespace QuoteSystemDataAccess
 {
     public class QuoteDataAccess
     {
-        public static void AddQuote(Quote quote)
+        public static string AddQuote(Quote quote)
         {
-            using(var dbContext = new QuoteDataModelContainer())
+            if (quote == null)
             {
-                dbContext.Quotes.Add(quote);
-
-                dbContext.SaveChanges();
+                return "Unable to add Null Quote ";
             }
+            try
+            {
+                using (var dbContext = new QuoteDataModelContainer())
+                {
+                    Quote status = dbContext.Quotes.Where(c => c.QuoteNumber == quote.QuoteNumber).FirstOrDefault();
+                    if(status != null)
+                    {
+                        return "Quote Already Exists !!";
+                    }
+                    dbContext.Quotes.Add(quote);
+
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                
+
+                throw new DatabaseException("Unable To Add New Quote To Database");
+            }
+            return "Successfully Added";
 
 
         }
         public static Quote ViewQuote(string QuoteNumber)
         {
             Quote quote;
-            using (var dbContext = new QuoteDataModelContainer())
+            try
             {
-                quote = dbContext.Quotes
-                    .Include("Prospect")
-                    .Include("PolicyTerm")
-                    .Include("Prospect.Businesses")
-                    .Include("Prospect.Businesses.Address")
-                    .Include("Prospect.Businesses.Coverages")
-                    .Where(Q => Q.QuoteNumber == QuoteNumber).FirstOrDefault<Quote>();
+                using (var dbContext = new QuoteDataModelContainer())
+                {
+                    quote = dbContext.Quotes
+                        .Include("Prospect")
+                        .Include("PolicyTerm")
+                        .Include("Prospect.Businesses")
+                        .Include("Prospect.Businesses.Address")
+                        .Include("Prospect.Businesses.Coverages")
+                        .Where(Q => Q.QuoteNumber == QuoteNumber).FirstOrDefault<Quote>();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw new DatabaseException("Unable To Fetch the Quote From Database");
             }
             return quote;
         }
         public static List<Quote> ViewAllQuote()
         {
             List<Quote> Quotes;
-            using (var dbContext = new QuoteDataModelContainer())
+            try
             {
-                Quotes = dbContext.Quotes
-                         .Include("Prospect")
-                         .Include("PolicyTerm")
-                         .Include("Prospect.Businesses")
-                         .Include("Prospect.Businesses.Address")
-                         .Include("Prospect.Businesses.Coverages")
-                         .ToList<Quote>();
+                using (var dbContext = new QuoteDataModelContainer())
+                {
+                    Quotes = dbContext.Quotes
+                             .Include("Prospect")
+                             .Include("PolicyTerm")
+                             .Include("Prospect.Businesses")
+                             .Include("Prospect.Businesses.Address")
+                             .Include("Prospect.Businesses.Coverages")
+                             .ToList<Quote>();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw new DatabaseException("Unable To Fetch Quotes From Database");
             }
             return Quotes;
         }
 
-        public static void DeleteQuote(string quotenum)
+        public static string DeleteQuote(string quotenum)
         {
-            using (var dbContext = new QuoteDataModelContainer())
+            try
             {
-                Quote quote = dbContext.Quotes
-                    .Include("Prospect")
-                    .Include("PolicyTerm")
-                    .Include("Prospect.Businesses")
-                    .Include("Prospect.Businesses.Address")
-                    .Include("Prospect.Businesses.Coverages")
-                    .Where(c => c.QuoteNumber == quotenum)
-                    .FirstOrDefault();
-
-                if(quote != null)
+                using (var dbContext = new QuoteDataModelContainer())
                 {
-                    if(quote.Prospect != null)
+                    Quote quote = dbContext.Quotes
+                        .Include("Prospect")
+                        .Include("PolicyTerm")
+                        .Include("Prospect.Businesses")
+                        .Include("Prospect.Businesses.Address")
+                        .Include("Prospect.Businesses.Coverages")
+                        .Where(c => c.QuoteNumber == quotenum)
+                        .FirstOrDefault();
+
+                    if (quote != null)
                     {
-                        dbContext.PolicyTerms.Remove(quote.PolicyTerm);
+                        if (quote.Prospect != null)
+                        {
+                            dbContext.PolicyTerms.Remove(quote.PolicyTerm);
 
-                        foreach(var business in quote.Prospect.Businesses.ToList())
+                            foreach (var business in quote.Prospect.Businesses.ToList())
 
- {
-                            foreach (var coverage in business.Coverages.ToList())
                             {
-                                dbContext.Coverages.Remove(coverage);
+                                foreach (var coverage in business.Coverages.ToList())
+                                {
+                                    dbContext.Coverages.Remove(coverage);
+                                }
+                                dbContext.Addresses.Remove(business.Address);
+                                dbContext.Businesses.Remove(business);
                             }
-                            dbContext.Addresses.Remove(business.Address);
-                            dbContext.Businesses.Remove(business);
+                            dbContext.Prospects.Remove(quote.Prospect);
                         }
-                        dbContext.Prospects.Remove(quote.Prospect);
+                        else
+                        {
+                            return "Prospect Details Not Found";
+                        }
+
+                        dbContext.Quotes.Remove(quote);
                     }
-                    
-                    dbContext.Quotes.Remove(quote);
+                    else
+                    {
+                        return "Quote Not Found";
+                    }
+
+                    dbContext.SaveChanges();
                 }
-               
-                dbContext.SaveChanges();
             }
+            catch (Exception)
+            {
+
+                throw new DatabaseException("Unable to Delete Quote From Database");
+            }
+
+            return "Successfully Deleted";
 
                 
         }
        
-        public static void UpdateQuote(Quote UpdatedQuote)
+        public static string UpdateQuote(Quote UpdatedQuote)
         {
-            using(var dbContext = new QuoteDataModelContainer())
+            if(UpdatedQuote == null)
             {
-                Quote OldQuote = dbContext.Quotes
-                    .Include("Prospect")
-                    .Include("PolicyTerm")
-                    .Include("Prospect.Businesses")
-                    .Include("Prospect.Businesses.Address")
-                    .Include("Prospect.Businesses.Coverages")
-                    .Where(c => c.QuoteNumber == UpdatedQuote.QuoteNumber)
-                    .FirstOrDefault();
-
-                if (OldQuote != null)
+                return "Unable to Update a null quote";
+            }
+            try
+            {
+                using (var dbContext = new QuoteDataModelContainer())
                 {
-                    if(OldQuote.Prospect != null)
+                    Quote OldQuote = dbContext.Quotes
+                        .Include("Prospect")
+                        .Include("PolicyTerm")
+                        .Include("Prospect.Businesses")
+                        .Include("Prospect.Businesses.Address")
+                        .Include("Prospect.Businesses.Coverages")
+                        .Where(c => c.QuoteNumber == UpdatedQuote.QuoteNumber)
+                        .FirstOrDefault();
+
+                    if (OldQuote != null)
                     {
-                        OldQuote.PolicyTerm.PolicyEffectiveDate = UpdatedQuote.PolicyTerm.PolicyEffectiveDate;
-                        OldQuote.PolicyTerm.PolicyExpiryDate = UpdatedQuote.PolicyTerm.PolicyExpiryDate;
-
-                        OldQuote.Premium = UpdatedQuote.Premium;
-                        OldQuote.RiskState = UpdatedQuote.RiskState;
-
-                        OldQuote.Prospect.Contact = UpdatedQuote.Prospect.Contact;
-                        OldQuote.Prospect.Email = UpdatedQuote.Prospect.Email;
-                        OldQuote.Prospect.NumberOfBusinessUnits = UpdatedQuote.Prospect.NumberOfBusinessUnits;
-                        OldQuote.Prospect.OrganisationName = UpdatedQuote.Prospect.OrganisationName;
-
-                        foreach(var business in OldQuote.Prospect.Businesses.ToList())
+                        if (OldQuote.Prospect != null)
                         {
-                            
-                            foreach(var coverage in business.Coverages.ToList())
+                            OldQuote.PolicyTerm.PolicyEffectiveDate = UpdatedQuote.PolicyTerm.PolicyEffectiveDate;
+                            OldQuote.PolicyTerm.PolicyExpiryDate = UpdatedQuote.PolicyTerm.PolicyExpiryDate;
+
+                            OldQuote.Premium = UpdatedQuote.Premium;
+                            OldQuote.RiskState = UpdatedQuote.RiskState;
+
+                            OldQuote.Prospect.Contact = UpdatedQuote.Prospect.Contact;
+                            OldQuote.Prospect.Email = UpdatedQuote.Prospect.Email;
+                            OldQuote.Prospect.NumberOfBusinessUnits = UpdatedQuote.Prospect.NumberOfBusinessUnits;
+                            OldQuote.Prospect.OrganisationName = UpdatedQuote.Prospect.OrganisationName;
+
+                            foreach (var business in OldQuote.Prospect.Businesses.ToList())
                             {
-                                dbContext.Coverages.Remove(coverage);
+
+                                foreach (var coverage in business.Coverages.ToList())
+                                {
+                                    dbContext.Coverages.Remove(coverage);
+                                }
+
+                                dbContext.Addresses.Remove(business.Address);
+                                dbContext.Businesses.Remove(business);
                             }
 
-                            dbContext.Addresses.Remove(business.Address);
-                            dbContext.Businesses.Remove(business);
+                            foreach (var business in UpdatedQuote.Prospect.Businesses)
+                            {
+                                OldQuote.Prospect.Businesses.Add(business);
+
+                            }
+
+
                         }
-
-                        foreach(var business in UpdatedQuote.Prospect.Businesses)
+                        else
                         {
-                            OldQuote.Prospect.Businesses.Add(business);
-
-                        } 
-
-                        
+                            return "Prospect Details Not Found";
+                        }
                     }
-                }
-                dbContext.SaveChanges();
+                    else
+                    {
+                        return "Quote Not Found";
+                    }
+                    dbContext.SaveChanges();
 
-            };
+                };
+            }
+            catch (Exception)
+            {
+                
+                throw new DatabaseException("Unable to Update Quote , Something Went Wrong");
+            }
+            return "Successfully Updated";
 
         }
 

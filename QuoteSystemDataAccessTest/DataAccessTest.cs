@@ -13,7 +13,7 @@ namespace QuoteSystemDataAccessTest
         static void Main(string[] args)
         {
             //Testing add quote
-           Console.ReadKey();
+            Console.ReadKey();
 
             //TestQuoteDataAccess.AddQuoteTest();
 
@@ -28,14 +28,16 @@ namespace QuoteSystemDataAccessTest
             //TestQuoteDataAccess.ViewQuoteTest();
             //Console.ReadKey();
 
-            //TestQuoteDataAccess.ViewAllQuoteTest();
-            //Console.ReadKey();
+            // TestQuoteDataAccess.ViewAllQuoteTest();
+
 
             //TestQuoteDataAccess.UpdateQuoteTest();
 
             //TestProspectDataAccess.ViewProspectTest();
 
-            TestProspectDataAccess.ViewAllProspectsTest();
+            //TestProspectDataAccess.ViewAllProspectsTest();
+
+            Console.ReadLine();
 
 
         }

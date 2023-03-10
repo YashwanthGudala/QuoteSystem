@@ -12,9 +12,17 @@ namespace QuoteSystemDataAccess
         public static Prospect ViewProspect(int prospectid)
         {
             Prospect prospect;
-            using (var dbContext = new QuoteDataModelContainer())
+            try
             {
-                 prospect = dbContext.Prospects.Where(c => c.Id == prospectid).FirstOrDefault();
+                using (var dbContext = new QuoteDataModelContainer())
+                {
+                    prospect = dbContext.Prospects.Where(c => c.Id == prospectid).FirstOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw new DatabaseException("Unable To Fetch Prospect Details From Database");
             }
 
             return prospect;
@@ -24,9 +32,17 @@ namespace QuoteSystemDataAccess
         public static List<Prospect> ViewAllProspects()
         {
             List<Prospect> prospects;
-            using (var dbContext = new QuoteDataModelContainer())
+            try
             {
-                prospects = dbContext.Prospects.ToList();
+                using (var dbContext = new QuoteDataModelContainer())
+                {
+                    prospects = dbContext.Prospects.ToList();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw new DatabaseException("Unable To Fetch Prospect Records From Database");
             }
 
             return prospects;

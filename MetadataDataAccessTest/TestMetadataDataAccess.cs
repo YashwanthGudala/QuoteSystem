@@ -26,7 +26,7 @@ namespace MetadataDataAccessTest
             };
 
 
-            string res = MetadataDataAccess.CodeValueDataAccess.AddCodeValueToList(listname, codeValue);
+            string res = MetadataDataAccess.CodeValueDataAccess.AddCodeValue(listname, codeValue);
             Console.WriteLine(res);
 
         }
@@ -35,12 +35,12 @@ namespace MetadataDataAccessTest
             Console.WriteLine("Enter List Name");
             string newlist = Console.ReadLine();
 
-            string res = MetadataDataAccess.CodeValueDataAccess.AddNewCodeValueList(newlist);
+            string res = MetadataDataAccess.CodeValueDataAccess.AddCodeValueList(newlist);
             Console.WriteLine(res);
         }
         public static void ViewAllCodeValueListsTest()
         {
-            List<CodeValueList> codeValueLists = MetadataDataAccess.CodeValueDataAccess.ViewAllCodeValueLists();
+            List<CodeValueList> codeValueLists = MetadataDataAccess.CodeValueDataAccess.GetAllCodeValueLists();
 
             foreach(var list in codeValueLists)
             {

@@ -212,20 +212,34 @@ namespace QuoteSystemDataAccessTest
 
         public static void AddQuoteTest()
         {
-            Quote quote = GetSampleQuote();
+            try
+            {
+                Quote quote = null;
 
-            QuoteSystemDataAccess.QuoteDataAccess.AddQuote(quote);
+                string res = QuoteSystemDataAccess.QuoteDataAccess.AddQuote(quote);
+
+                Console.WriteLine(res);
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
         }
 
         public static void RemoveQuoteTest()
         {
-            QuoteSystemDataAccess.QuoteDataAccess.DeleteQuote("Q-2302001");
+            string res = QuoteSystemDataAccess.QuoteDataAccess.DeleteQuote("Q-2302001");
+
+            Console.WriteLine(res);
         }
         public static void UpdateQuoteTest()
         {
             Quote quote = GetSampleUpdateQuote();
 
-            QuoteSystemDataAccess.QuoteDataAccess.UpdateQuote(quote);
+            string res = QuoteSystemDataAccess.QuoteDataAccess.UpdateQuote(quote);
+
+            Console.WriteLine(res);
 
             
             
@@ -233,7 +247,16 @@ namespace QuoteSystemDataAccessTest
         public static void ViewQuoteTest()
         {
             Quote quote = QuoteSystemDataAccess.QuoteDataAccess.ViewQuote("Q-567");
-            Console.WriteLine(quote.Premium + " " + quote.QuoteNumber + " " + quote.RiskState + " " + quote.AgentId + " " + quote.Prospect.OrganisationName);
+            if(quote == null)
+            {
+                Console.WriteLine("Quote Not Found");
+            }
+            else
+            {
+                Console.WriteLine(quote.Premium + " " + quote.QuoteNumber + " " + quote.RiskState + " " + quote.AgentId + " " + quote.Prospect.OrganisationName);
+
+            }
+            
 
         }
         public static void ViewAllQuoteTest()
