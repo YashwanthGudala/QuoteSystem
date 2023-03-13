@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QuoteSystemDataModel;
-using MetadataDataAccess;
+using QuoteSystemDataAccess;
 
 namespace MetadataDataAccessTest
 {
@@ -26,7 +26,7 @@ namespace MetadataDataAccessTest
             };
 
 
-            string res = MetadataDataAccess.CodeValueDataAccess.AddCodeValue(listname, codeValue);
+            string res = QuoteSystemDataAccess.CodeValueDataAccess.AddCodeValue(listname, codeValue);
             Console.WriteLine(res);
 
         }
@@ -35,12 +35,12 @@ namespace MetadataDataAccessTest
             Console.WriteLine("Enter List Name");
             string newlist = Console.ReadLine();
 
-            string res = MetadataDataAccess.CodeValueDataAccess.AddCodeValueList(newlist);
+            string res = QuoteSystemDataAccess.CodeValueDataAccess.AddCodeValueList(newlist);
             Console.WriteLine(res);
         }
         public static void ViewAllCodeValueListsTest()
         {
-            List<CodeValueList> codeValueLists = MetadataDataAccess.CodeValueDataAccess.GetAllCodeValueLists();
+            List<CodeValueList> codeValueLists = QuoteSystemDataAccess.CodeValueDataAccess.GetAllCodeValueLists();
 
             foreach(var list in codeValueLists)
             {
@@ -51,7 +51,7 @@ namespace MetadataDataAccessTest
         {
             Console.WriteLine("Enter List name");
             string listname = Console.ReadLine();
-            string res = MetadataDataAccess.CodeValueDataAccess.DeleteCodeValueList(listname);
+            string res = QuoteSystemDataAccess.CodeValueDataAccess.DeleteCodeValueList(listname);
             Console.WriteLine(res);
         }
 

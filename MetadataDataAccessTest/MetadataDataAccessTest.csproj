@@ -59,9 +59,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MetadataDataAccess\MetadataDataAccess.csproj">
-      <Project>{cb11baf8-91df-4658-b9d2-97e84816ae47}</Project>
-      <Name>MetadataDataAccess</Name>
+    <ProjectReference Include="..\QuoteSystemDataAccess\QuoteSystemDataAccess.csproj">
+      <Project>{e5598c23-496f-4c94-8f13-48b8b18bab3c}</Project>
+      <Name>QuoteSystemDataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\QuoteSystemDataModel\QuoteSystemDataModel.csproj">
       <Project>{1de69410-2561-44d1-b055-fd39a412f685}</Project>

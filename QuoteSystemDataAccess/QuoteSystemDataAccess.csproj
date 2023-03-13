@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgentDataAccess.cs" />
+    <Compile Include="CodeValueDataAccess.cs" />
     <Compile Include="DatabaseException.cs" />
     <Compile Include="ProspectDataAccess.cs" />
     <Compile Include="QuoteDataAccess.cs" />
