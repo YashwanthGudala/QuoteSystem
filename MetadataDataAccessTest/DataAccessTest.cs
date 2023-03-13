@@ -26,7 +26,8 @@ namespace MetadataDataAccessTest
                 Console.WriteLine("4. Add Code Value Pair To List");
                 Console.WriteLine("5. Get Code Values By List Name");
                 Console.WriteLine("6. Get Value By Code And ListName ");
-                Console.WriteLine("7. Exit Application");
+                Console.WriteLine("7. Delete Code Value Pair From List");
+                Console.WriteLine("8. Exit Application");
 
                 option = Convert.ToInt32(Console.ReadLine());
 
@@ -52,8 +53,11 @@ namespace MetadataDataAccessTest
                     case 6:
                         TestMetadataDataAccess.GetValueFromCodeTest();
                         break;
+                    case 7:
+                        TestMetadataDataAccess.DeleteCodeValueTest();
+                        break;
                 }
-            } while (option != 7);
+            } while (option != 8);
 
         }
     }

@@ -89,6 +89,19 @@ namespace QuoteSystemDataAccessTest
             Console.WriteLine(res);
 
         }
+        public static void DeleteCodeValueTest()
+        {
+            Console.WriteLine("Enter List Name");
+            string listname = Console.ReadLine();
+
+            Console.WriteLine("Enter Code");
+            string Code = Console.ReadLine();
+
+            string res = QuoteSystemDataAccess.MetadataDataAccess.DeleteCodeValue(listname, Code);
+
+            Console.WriteLine(res);
+
+        }
 
 
 

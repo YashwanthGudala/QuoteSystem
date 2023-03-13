@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QuoteSystemDataModel;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace QuoteSystemDataAccess
 {
@@ -195,6 +198,66 @@ namespace QuoteSystemDataAccess
             return "Deleted Successfully";
 
         }
+        public static string DeleteCodeValue(string ListName, string Code)
+        {
+            CodeValueList codevaluelist;
+            int flag = 0;
+            if (ListName.Length == 0)
+            {
+                return "ListName is mandatory";
+            }
+
+            try
+            {
+                using (var dbContext = new QuoteDataModelContainer())
+                {
+                    codevaluelist = dbContext.CodeValueLists.Where(c => c.ListName == ListName).FirstOrDefault();
+                    if (codevaluelist == null)
+                    {
+                        return "listname not found";
+                    }
+
+                    foreach (var codevalue in codevaluelist.CodeValues.ToList())
+                    {
+                        if (codevalue.Code == Code)
+                        {
+                            dbContext.CodeValues.Remove(codevalue);
+                            flag = 1;
+                            dbContext.SaveChanges();
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw new DatabaseException("Unable to delete codevalue");
+            }
+
+            if (flag == 0)
+            {
+                return "Unable to fetch the code";
+            }
+
+            return "Succesfully deleted";
+        }
+
+        //public static string LoadCodeValuePairsFromJsonFile()
+        //{
+        //    string FileLocation = @"Assets/USStates.json";
+
+        //    string text =
+
+        //    JObject o1 = JObject.Parse(File.ReadAllText(@"c:\data.json"));
+
+
+
+
+        //}
 
     }
 }
