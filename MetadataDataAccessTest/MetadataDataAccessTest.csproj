@@ -52,13 +52,16 @@
   <ItemGroup>
     <Compile Include="DataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestMetadataDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QuoteSystemDataAccessTest\QuoteSystemDataAccessTest.csproj">
+      <Project>{b0ee5d03-9184-4b29-8f0e-ed5d1283c37d}</Project>
+      <Name>QuoteSystemDataAccessTest</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QuoteSystemDataAccess\QuoteSystemDataAccess.csproj">
       <Project>{e5598c23-496f-4c94-8f13-48b8b18bab3c}</Project>
       <Name>QuoteSystemDataAccess</Name>

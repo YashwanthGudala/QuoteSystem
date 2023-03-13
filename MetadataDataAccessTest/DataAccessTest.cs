@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QuoteSystemDataAccessTest;
+
 
 namespace MetadataDataAccessTest
 {
@@ -22,7 +24,9 @@ namespace MetadataDataAccessTest
                 Console.WriteLine("2. View All Code Value List");
                 Console.WriteLine("3. Delete Code Value List");
                 Console.WriteLine("4. Add Code Value Pair To List");
-                Console.WriteLine("5. Exit Application");
+                Console.WriteLine("5. Get Code Values By List Name");
+                Console.WriteLine("6. Get Value By Code And ListName ");
+                Console.WriteLine("7. Exit Application");
 
                 option = Convert.ToInt32(Console.ReadLine());
 
@@ -42,8 +46,14 @@ namespace MetadataDataAccessTest
                     case 4:
                         TestMetadataDataAccess.AddCodeValueToListTest();
                         break;
+                    case 5:
+                        TestMetadataDataAccess.GetCodeValuesByListNameTest();
+                        break;
+                    case 6:
+                        TestMetadataDataAccess.GetValueFromCodeTest();
+                        break;
                 }
-            } while (option != 5);
+            } while (option != 7);
 
         }
     }
