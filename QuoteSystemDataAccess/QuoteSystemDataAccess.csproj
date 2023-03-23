@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AgentDataAccess.cs" />
     <Compile Include="Assets\State.cs" />
+    <Compile Include="CoveragesDataAccess.cs" />
     <Compile Include="MetadataDataAccess.cs" />
     <Compile Include="DatabaseException.cs" />
     <Compile Include="ProspectDataAccess.cs" />

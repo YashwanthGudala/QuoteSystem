@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="DataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestCoveragesDataAccess.cs" />
     <Compile Include="TestMetadataDataAccess.cs" />
     <Compile Include="TestProspectDataAccess.cs" />
     <Compile Include="TestQuoteDataAccess.cs" />

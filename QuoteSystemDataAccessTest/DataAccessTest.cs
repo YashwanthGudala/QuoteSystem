@@ -36,6 +36,12 @@ namespace QuoteSystemDataAccessTest
             //TestProspectDataAccess.ViewProspectTest();
 
             //TestProspectDataAccess.ViewAllProspectsTest();
+            //TestCoveragesDataAccess.AddCoveragesTest();
+
+            //TestCoveragesDataAccess.UpdateCoverageTest();
+            //TestCoveragesDataAccess.DeleteCoveragesTest();
+            //TestCoveragesDataAccess.GetAllCoveragesTest();
+            TestCoveragesDataAccess.ViewSpecificCoveragesTest();
 
             Console.ReadLine();
 
