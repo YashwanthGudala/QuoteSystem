@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteSystemDataAccessTest",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetadataDataAccessTest", "MetadataDataAccessTest\MetadataDataAccessTest.csproj", "{ABAA1B6C-7A87-48CE-8139-53CB24D28B2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteSystemBusiness", "QuoteSystemBusiness\QuoteSystemBusiness.csproj", "{A4007F51-8B5E-44C3-A345-E42BE1C69A1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteSystemBusinessTest", "QuoteSystemBusinessTest\QuoteSystemBusinessTest.csproj", "{2723D46F-15C4-4417-B2D7-D754A22F61AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{ABAA1B6C-7A87-48CE-8139-53CB24D28B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABAA1B6C-7A87-48CE-8139-53CB24D28B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABAA1B6C-7A87-48CE-8139-53CB24D28B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4007F51-8B5E-44C3-A345-E42BE1C69A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4007F51-8B5E-44C3-A345-E42BE1C69A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4007F51-8B5E-44C3-A345-E42BE1C69A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4007F51-8B5E-44C3-A345-E42BE1C69A1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2723D46F-15C4-4417-B2D7-D754A22F61AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2723D46F-15C4-4417-B2D7-D754A22F61AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2723D46F-15C4-4417-B2D7-D754A22F61AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2723D46F-15C4-4417-B2D7-D754A22F61AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

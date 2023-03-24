@@ -11,24 +11,18 @@ namespace QuoteSystemDataAccess
     {
         public static void AddAgent(Agent agent)
         {
-
-        }
-
-        public static void UpdateAgent(Agent agent)
-        {
-
-        }
-        public static void DeleteAgent(Agent agent)
-        {
-
-        }
-        public static void ViewAgent(string AgentID)
-        {
-
-        }
-        public static bool AgentAuthentication(string agentid , string password)
-        {
-            return true;
+            try
+            {
+                using (var dbContext = new QuoteDataModelContainer())
+                {
+                    dbContext.Agents.Add(agent);
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
