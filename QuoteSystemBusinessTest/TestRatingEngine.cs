@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using QuoteSystemBusiness;
 namespace QuoteSystemBusinessTest
 {
-    class Program
+    public class TestRatingEngine
     {
         static void Main(string[] args)
         {
-            QuoteSystemBusiness.RatingEngine.LoadMetaData();
+
+
+            //RatingEngine.LoadMetaData();
+            RatingEngine.DisplayAllTables();
             Console.Read();
 
         }

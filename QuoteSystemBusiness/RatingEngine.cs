@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,23 +11,45 @@ namespace QuoteSystemBusiness
 {
     public class RatingEngine
     {
+        public static RateMetaData metaData;
         public static void LoadMetaData()
         {
-            string filepath = "D:\\RateMetaData.xml";
-
+            string FilePath = "D:\\RateMetaData.xml";
             RateMetaData objectToDeserialize = new RateMetaData();
             XmlSerializer xmlserializer = new XmlSerializer(objectToDeserialize.GetType());
-            RateMetaData result;
-            
-
-            using (StreamReader streamReader = new StreamReader(filepath))
+            
+            using (StreamReader streamReader = new StreamReader(FilePath))
             {
-                result = (RateMetaData)xmlserializer.Deserialize(streamReader);
+                metaData = (RateMetaData)xmlserializer.Deserialize(streamReader);
             }
 
-            Console.WriteLine(result.RateTables.FirstOrDefault().Name);
+            
+        }
+        public static void DisplayAllTables()
+        {
+            LoadMetaData();
 
+            foreach(var ratetable in metaData.RateTables.RateTable.ToList())
+            {
+                //name
+                Console.WriteLine(ratetable.Name);
+
+                //rate rows
+                foreach(var raterow in ratetable.RateRow.ToList())
+                {
+                    //rate keys
+                    foreach(var ratekey in raterow.RateKeys.RateKey.ToList())
+                    {
+                        Console.WriteLine(ratekey.KeyName + "--->" + ratekey.KeyValue);
+                    }
+
+                    //rate value
+                    Console.WriteLine(raterow.RateFactor.FactorName + "--->" + raterow.RateFactor.FactorValue);
+                }
+            }
 
         }
+
+
     }
 }
