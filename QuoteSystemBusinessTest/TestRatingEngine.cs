@@ -13,7 +13,21 @@ namespace QuoteSystemBusinessTest
 
 
             //RatingEngine.LoadMetaData();
-            RatingEngine.DisplayAllTables();
+            //RatingEngine.DisplayAllTables();
+
+            //float res = RatingEngine.LookupRate("Deductible Factor", "250", "BI");
+
+            //Console.WriteLine(res);
+
+            //res = RatingEngine.LookupRate("Limit Factor", "25000", "50000");
+
+            //Console.WriteLine(res);
+
+            //res = RatingEngine.LookupRate("Premises Operations Loss Cost", "27025", "001");
+
+            //Console.WriteLine(res);
+
+            RatingEngine.GetPremiumTest();
             Console.Read();
 
         }
