@@ -42,7 +42,7 @@ namespace QuoteSystemDataAccessTest
         {
             List<CodeValueList> codeValueLists = QuoteSystemDataAccess.MetadataDataAccess.GetAllCodeValueLists();
 
-            foreach(var list in codeValueLists)
+            foreach (var list in codeValueLists)
             {
                 Console.WriteLine(list.ListName);
             }
@@ -73,8 +73,8 @@ namespace QuoteSystemDataAccessTest
 
             }
 
-            
-            
+
+
         }
         public static void GetValueFromCodeTest()
         {

@@ -41,7 +41,7 @@ namespace QuoteSystemDataAccessTest
             string res = CoveragesDataAccess.AddCoverages(id, coverages);
 
             Console.WriteLine(res);
-            
+
         }
         public static void UpdateCoverageTest()
         {

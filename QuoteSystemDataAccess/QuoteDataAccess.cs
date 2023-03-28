@@ -21,7 +21,7 @@ namespace QuoteSystemDataAccess
                 using (var dbContext = new QuoteDataModelContainer())
                 {
                     Quote status = dbContext.Quotes.Where(c => c.QuoteNumber == quote.QuoteNumber).FirstOrDefault();
-                    if(status != null)
+                    if (status != null)
                     {
                         return "Quote Already Exists !!";
                     }
@@ -32,7 +32,7 @@ namespace QuoteSystemDataAccess
             }
             catch (Exception)
             {
-                
+
 
                 throw new DatabaseException("Unable To Add New Quote To Database");
             }
@@ -143,12 +143,12 @@ namespace QuoteSystemDataAccess
 
             return "Successfully Deleted";
 
-                
+
         }
-       
+
         public static string UpdateQuote(Quote UpdatedQuote)
         {
-            if(UpdatedQuote == null)
+            if (UpdatedQuote == null)
             {
                 return "Unable to Update a null quote";
             }
@@ -215,7 +215,7 @@ namespace QuoteSystemDataAccess
             }
             catch (Exception)
             {
-                
+
                 throw new DatabaseException("Unable to Update Quote , Something Went Wrong");
             }
             return "Successfully Updated";
@@ -223,8 +223,8 @@ namespace QuoteSystemDataAccess
         }
 
 
-        }
-
-
     }
+
+
+}
 

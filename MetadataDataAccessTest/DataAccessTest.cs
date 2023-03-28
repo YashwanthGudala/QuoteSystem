@@ -13,7 +13,7 @@ namespace MetadataDataAccessTest
         static void Main(string[] args)
         {
             //testing add new code list
-           //TestMetadataDataAccess.AddCodeValueToListTest();
+            //TestMetadataDataAccess.AddCodeValueToListTest();
 
             int option;
             do

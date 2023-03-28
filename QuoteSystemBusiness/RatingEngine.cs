@@ -6,11 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-
+using QuoteSystemDataModel;
 namespace QuoteSystemBusiness
 {
     public class RatingEngine
     {
+        private static string BaserateTable = "Premises Operations Loss Cost";
+        private static string LimitFactorTable = "Limit Factor";
+        private static string DeductibleFactorTable = "Deductible Factor";
+
         public static RateMetaData metaData;
         public static void LoadMetaData()
         {
@@ -55,7 +59,9 @@ namespace QuoteSystemBusiness
             LoadMetaData();
             float result = 0.0f;
 
-            
+
+            try
+            {
                 var ratetable = metaData.RateTables.RateTable.Where(c => c.Name == TableName).FirstOrDefault();
 
                 //rate rows
@@ -78,8 +84,14 @@ namespace QuoteSystemBusiness
                     }
 
                 }
+            }
+            catch (Exception)
+            {
 
-            
+                throw new DatabaseException("Unable To Fetch From XML File");
+            }
+
+
 
             return result;
 
@@ -87,25 +99,50 @@ namespace QuoteSystemBusiness
 
         }
 
-        public static void GetPremiumTest()
+
+        public static float RateQuote(Quote quote)
         {
-            int exposureunits = 2;
+            float TotalPremium = 0f;
 
-            string classcode = "27025";
-            string teritorry = "001";
+            try
+            {
+                foreach (var business in quote.Prospect.Businesses.ToList())
+                {
+                    float BusinessPremium = 0f;
+                    float ExposureUnits = business.Exposure / 1000;
 
-            float baserate = LookupRate("Premises Operations Loss Cost", classcode, teritorry);
+                    Coverage coverage = business.Coverages.FirstOrDefault();
 
-            float limitfactor = LookupRate("Limit Factor", "25000", "50000");
 
-            float DeductibleFactor = LookupRate("Deductible Factor", "250", "BI");
+                    //Baserate 
+                    float BusinessBaserate = LookupRate(BaserateTable, business.IndustryType, business.Territory);
 
-            float adjlimitfactor = limitfactor - DeductibleFactor;
-            float premium = baserate * adjlimitfactor * exposureunits;
+                    float LimitFactor = LookupRate(LimitFactorTable, coverage.OccuranceLimit.ToString(), coverage.AggregateLimit.ToString());
 
-            Console.WriteLine(premium);
+                    float DeductibleFactor = LookupRate(DeductibleFactorTable, coverage.Deductible.ToString(), coverage.CoverageName);
+                        
+
+                    float AdjustLimitFactor = LimitFactor - DeductibleFactor;
+
+                    BusinessPremium = BusinessBaserate * AdjustLimitFactor * ExposureUnits;
+
+                    TotalPremium += BusinessPremium;
+
+
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw new DatabaseException("Something Went Wrong");
+            }
+
+            return TotalPremium;
 
         }
-        
+
+      
+
     }
 }

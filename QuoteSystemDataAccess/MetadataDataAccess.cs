@@ -84,7 +84,7 @@ namespace QuoteSystemDataAccess
                 {
                     codevaluelist = dbContext.CodeValueLists.Where(C => C.ListName == ListName).FirstOrDefault();
 
-                    if(codevaluelist == null)
+                    if (codevaluelist == null)
                     {
                         return null;
                     }
@@ -117,7 +117,7 @@ namespace QuoteSystemDataAccess
                 using (var dbContext = new QuoteDataModelContainer())
                 {
                     codevaluelist = dbContext.CodeValueLists.Where(C => C.ListName == ListName).FirstOrDefault();
-                    if(codevaluelist == null)
+                    if (codevaluelist == null)
                     {
                         return "List Name Not Found";
                     }
@@ -171,12 +171,12 @@ namespace QuoteSystemDataAccess
                 {
                     codeValueList = dbContext.CodeValueLists.Where(c => c.ListName == ListName).FirstOrDefault();
 
-                    if(codeValueList == null)
+                    if (codeValueList == null)
                     {
                         return "Code Value List Not Found";
                     }
 
-                    foreach(var codelist in codeValueList.CodeValues.ToList())
+                    foreach (var codelist in codeValueList.CodeValues.ToList())
                     {
                         dbContext.CodeValues.Remove(codelist);
                     }
@@ -184,13 +184,13 @@ namespace QuoteSystemDataAccess
                     dbContext.CodeValueLists.Remove(codeValueList);
 
                     dbContext.SaveChanges();
-                    
+
 
                 }
             }
             catch (Exception)
             {
-               
+
 
                 throw new DatabaseException("Unable to Delete Code Value List");
             }

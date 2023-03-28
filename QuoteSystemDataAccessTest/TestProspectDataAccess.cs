@@ -23,7 +23,7 @@ namespace QuoteSystemDataAccessTest
         {
             List<Prospect> prospects = QuoteSystemDataAccess.ProspectDataAccess.ViewAllProspects();
 
-            foreach(var prospect in prospects)
+            foreach (var prospect in prospects)
             {
                 Console.WriteLine(prospect.OrganisationName);
             }

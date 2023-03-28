@@ -241,13 +241,13 @@ namespace QuoteSystemDataAccessTest
 
             Console.WriteLine(res);
 
-            
-            
+
+
         }
         public static void ViewQuoteTest()
         {
             Quote quote = QuoteSystemDataAccess.QuoteDataAccess.ViewQuote("Q-567");
-            if(quote == null)
+            if (quote == null)
             {
                 Console.WriteLine("Quote Not Found");
             }
@@ -256,7 +256,7 @@ namespace QuoteSystemDataAccessTest
                 Console.WriteLine(quote.Premium + " " + quote.QuoteNumber + " " + quote.RiskState + " " + quote.AgentId + " " + quote.Prospect.OrganisationName);
 
             }
-            
+
 
         }
         public static void ViewAllQuoteTest()

@@ -54,6 +54,10 @@
       <Project>{a4007f51-8b5e-44c3-a345-e42be1c69a1e}</Project>
       <Name>QuoteSystemBusiness</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QuoteSystemDataModel\QuoteSystemDataModel.csproj">
+      <Project>{1de69410-2561-44d1-b055-fd39a412f685}</Project>
+      <Name>QuoteSystemDataModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

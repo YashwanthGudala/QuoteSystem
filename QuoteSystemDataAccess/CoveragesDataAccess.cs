@@ -9,9 +9,9 @@ namespace QuoteSystemDataAccess
 {
     public class CoveragesDataAccess
     {
-        public static string AddCoverages(int BusinessId,List<Coverage> coverages)
+        public static string AddCoverages(int BusinessId, List<Coverage> coverages)
         {
-            if(coverages == null)
+            if (coverages == null)
             {
                 return "Unable To Handle Null Coverage";
             }
@@ -26,12 +26,12 @@ namespace QuoteSystemDataAccess
                     {
                         return "Business Not Found!!";
                     }
-                    foreach(var coverage in coverages)
+                    foreach (var coverage in coverages)
                     {
                         business.Coverages.Add(coverage);
 
                     }
-                    
+
 
                     dbContext.SaveChanges();
 
@@ -47,9 +47,9 @@ namespace QuoteSystemDataAccess
             }
 
         }
-        public static string UpdateCoverage(int BusinessId , string CoverageName , Coverage UpdatedCoverage)
+        public static string UpdateCoverage(int BusinessId, string CoverageName, Coverage UpdatedCoverage)
         {
-            if(CoverageName.Length == 0)
+            if (CoverageName.Length == 0)
             {
                 return "Coverage Name is Required";
             }
@@ -62,7 +62,7 @@ namespace QuoteSystemDataAccess
             {
                 using (var dbContext = new QuoteDataModelContainer())
                 {
-                    
+
                     Business business = dbContext.Businesses.Where(c => c.Id == BusinessId).FirstOrDefault();
                     if (business == null)
                     {
@@ -143,7 +143,7 @@ namespace QuoteSystemDataAccess
         }
         public static Coverage ViewSpecificCoverage(int BusinessID, string CoverageName)
         {
-            
+
 
             try
             {
@@ -165,7 +165,7 @@ namespace QuoteSystemDataAccess
             {
                 throw new DatabaseException("Unable to view Coverage");
             }
-            
+
         }
     }
 }
