@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using QuoteSystemDataModel;
+using QuoteSystemDataAccess;
+
 namespace QuoteSystemBusiness
 {
     public class RatingEngine
@@ -18,7 +20,7 @@ namespace QuoteSystemBusiness
         public static RateMetaData metaData;
         public static void LoadMetaData()
         {
-            string FilePath = "D:\\RateMetaData.xml";
+            string FilePath = ConfigurationManager.AppSettings["RateMetadataFilePath"];
             RateMetaData objectToDeserialize = new RateMetaData();
             XmlSerializer xmlserializer = new XmlSerializer(objectToDeserialize.GetType());
 
@@ -128,9 +130,14 @@ namespace QuoteSystemBusiness
 
                     TotalPremium += BusinessPremium;
 
+                    coverage.CoveragePremium = Math.Round(BusinessPremium,2);
 
+
+                    
 
                 }
+                quote.Premium = Math.Round(TotalPremium,2);
+                QuoteDataAccess.UpdateQuote(quote);
             }
             catch (Exception)
             {

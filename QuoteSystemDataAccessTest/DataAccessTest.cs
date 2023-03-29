@@ -41,7 +41,13 @@ namespace QuoteSystemDataAccessTest
             //TestCoveragesDataAccess.UpdateCoverageTest();
             //TestCoveragesDataAccess.DeleteCoveragesTest();
             //TestCoveragesDataAccess.GetAllCoveragesTest();
-            TestCoveragesDataAccess.ViewSpecificCoveragesTest();
+            //TestCoveragesDataAccess.ViewSpecificCoveragesTest();
+
+            // TestBusinessDataAccess.AddBusinessTest();
+            //TestBusinessDataAccess.RemoveBusinessTest();
+            //TestBusinessDataAccess.ViewBusinessTest();
+            //TestBusinessDataAccess.ViewAllBusinessTest();
+           // TestBusinessDataAccess.UpdateBusinessTest();
 
             Console.ReadLine();
 

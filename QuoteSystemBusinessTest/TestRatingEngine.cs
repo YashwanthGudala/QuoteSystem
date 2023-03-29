@@ -32,6 +32,7 @@ namespace QuoteSystemBusinessTest
             // RatingEngine.GetPremiumTest();
 
             Quote quote = GetSampleQuote();
+            
             float res = RatingEngine.RateQuote(quote);
 
             Console.WriteLine("Premium = " +res);
@@ -122,7 +123,7 @@ namespace QuoteSystemBusinessTest
 
             Quote quote = new Quote()
             {
-                QuoteNumber = "Q-2302001",
+                QuoteNumber = "Q-2302005",
                 RiskState = "USA",
                 Premium = 0d,
                 AgentId = "A001",
