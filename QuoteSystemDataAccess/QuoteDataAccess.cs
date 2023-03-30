@@ -10,6 +10,29 @@ namespace QuoteSystemDataAccess
 {
     public class QuoteDataAccess
     {
+        public static string GenerateQuoteNumber()
+        {
+            string year = DateTime.Now.Year.ToString();
+            year = year.Substring(year.Length - 2);
+
+            string LastQuoteNumber;
+
+            using(var dbContext = new QuoteDataModelContainer())
+            {
+                Quote quote = dbContext.Quotes.OrderByDescending(e => e.Id).First();
+                LastQuoteNumber = quote.QuoteNumber;
+            }
+            var LastQuoteList = LastQuoteNumber.Split('-');
+
+            int LastQuoteNum = Convert.ToInt32(LastQuoteList[1]);
+            LastQuoteNum += 1;
+
+            string NewQuoteNumber = "Q" + year + "CGL" + "-"+ LastQuoteNum.ToString().PadLeft(4, '0');
+            
+
+            return NewQuoteNumber;
+
+        }
         public static string AddQuote(Quote quote)
         {
             if (quote == null)
@@ -25,6 +48,7 @@ namespace QuoteSystemDataAccess
                     {
                         return "Quote Already Exists !!";
                     }
+                    quote.QuoteNumber = GenerateQuoteNumber();
                     dbContext.Quotes.Add(quote);
 
                     dbContext.SaveChanges();

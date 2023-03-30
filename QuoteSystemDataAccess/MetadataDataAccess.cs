@@ -91,7 +91,13 @@ namespace QuoteSystemDataAccess
 
                     foreach (CodeValue codevalue in codevaluelist.CodeValues.ToList())
                     {
-                        CodeValues.Add(codevalue);
+                        CodeValue codeValue = new CodeValue()
+                        {
+                            Code = codevalue.Code,
+                            Value = codevalue.Value
+                            
+                        };
+                        CodeValues.Add(codeValue);
                     }
                 }
             }

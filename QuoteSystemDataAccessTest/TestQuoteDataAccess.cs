@@ -276,7 +276,7 @@ namespace QuoteSystemDataAccessTest
 
             Prospect Prospect1 = new Prospect()
             {
-                OrganisationName = "Mahindra",
+                OrganisationName = "Adani Group",
                 Contact = "7674878760",
                 Email = "vijay@gmail.com",
                 NumberOfBusinessUnits = 2,
@@ -286,15 +286,15 @@ namespace QuoteSystemDataAccessTest
             PolicyTerm PolicyTerm = new PolicyTerm()
             {
                 PolicyEffectiveDate = System.DateTime.Now,
-                PolicyExpiryDate = System.DateTime.Now.AddDays(5)
+                PolicyExpiryDate = System.DateTime.Now.AddDays(365)
             };
 
             Quote quote = new Quote()
             {
-                QuoteNumber = "Q-2302005",
-                RiskState = "USA",
+                QuoteNumber = "",
+                RiskState = "Kansas",
                 Premium = 0d,
-                AgentId = "A001",
+                AgentId = "A002",
                 Prospect = Prospect1,
                 PolicyTerm = PolicyTerm
             };
@@ -321,7 +321,7 @@ namespace QuoteSystemDataAccessTest
 
         public static void RemoveQuoteTest()
         {
-            string res = QuoteSystemDataAccess.QuoteDataAccess.DeleteQuote("Q-2302005");
+            string res = QuoteSystemDataAccess.QuoteDataAccess.DeleteQuote("Q23CGL0002");
 
             Console.WriteLine(res);
         }
