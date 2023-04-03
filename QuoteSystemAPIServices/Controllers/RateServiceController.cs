@@ -13,9 +13,9 @@ namespace QuoteSystemAPIServices.Controllers
     {
         [HttpPost]
         [Route("api/RateServices/RateQuote")]
-        public float RateQuote(Quote quote)
+        public string RateQuote(Quote quote)
         {
-            float response =  RatingEngine.RateQuote(quote);
+            string response =  RatingEngine.RateQuote(quote);
             return response;
 
 

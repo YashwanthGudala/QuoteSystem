@@ -20,13 +20,21 @@ namespace QuoteSystemBusiness
         public static RateMetaData metaData;
         public static void LoadMetaData()
         {
-            string FilePath = ConfigurationManager.AppSettings["RateMetadataFilePath"];
-            RateMetaData objectToDeserialize = new RateMetaData();
-            XmlSerializer xmlserializer = new XmlSerializer(objectToDeserialize.GetType());
-
-            using (StreamReader streamReader = new StreamReader(FilePath))
+            try
             {
-                metaData = (RateMetaData)xmlserializer.Deserialize(streamReader);
+                string FilePath = ConfigurationManager.AppSettings["RateMetadataFilePath"];
+                RateMetaData objectToDeserialize = new RateMetaData();
+                XmlSerializer xmlserializer = new XmlSerializer(objectToDeserialize.GetType());
+
+                using (StreamReader streamReader = new StreamReader(FilePath))
+                {
+                    metaData = (RateMetaData)xmlserializer.Deserialize(streamReader);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw new DatabaseException("Unable To Fetch Data From XML File");
             }
 
 
@@ -58,6 +66,14 @@ namespace QuoteSystemBusiness
 
         public static float LookupRate(string TableName, params string[] inputratekeys)
         {
+            if(TableName.Length == 0)
+            {
+                throw new DatabaseException("Proper Table Name is Required");
+            }
+            if(inputratekeys.Length == 0)
+            {
+                throw new DatabaseException("Proper Number of Rate Keys are Required");
+            }
             LoadMetaData();
             float result = 0.0f;
 
@@ -65,6 +81,11 @@ namespace QuoteSystemBusiness
             try
             {
                 var ratetable = metaData.RateTables.RateTable.Where(c => c.Name == TableName).FirstOrDefault();
+
+                if(ratetable is null)
+                {
+                    throw new DatabaseException("Rate Table Not Found");
+                }
 
                 //rate rows
                 foreach (var raterow in ratetable.RateRow.ToList())
@@ -102,12 +123,20 @@ namespace QuoteSystemBusiness
         }
 
 
-        public static float RateQuote(Quote quote)
+        public static string RateQuote(Quote quote)
         {
+            if(quote is null)
+            {
+                return "Quote Object Cannot be Null";
+            }
             float TotalPremium = 0f;
 
             try
             {
+                if(quote?.Prospect is null )
+                {
+                    return "Prospect Details Not Found";
+                }
                 foreach (var business in quote.Prospect.Businesses.ToList())
                 {
                     float BusinessPremium = 0f;
@@ -117,18 +146,26 @@ namespace QuoteSystemBusiness
 
 
                     //Baserate 
-                    float BusinessBaserate = LookupRate(BaserateTable, business.IndustryType, business.Territory);
+                    try
+                    {
+                        float BusinessBaserate = LookupRate(BaserateTable, business.IndustryType, business.Territory);
 
-                    float LimitFactor = LookupRate(LimitFactorTable, coverage.OccuranceLimit.ToString(), coverage.AggregateLimit.ToString());
+                        float LimitFactor = LookupRate(LimitFactorTable, coverage.OccuranceLimit.ToString(), coverage.AggregateLimit.ToString());
 
-                    float DeductibleFactor = LookupRate(DeductibleFactorTable, coverage.Deductible.ToString(), coverage.CoverageName);
-                        
+                        float DeductibleFactor = LookupRate(DeductibleFactorTable, coverage.Deductible.ToString(), coverage.CoverageName);
 
-                    float AdjustLimitFactor = LimitFactor - DeductibleFactor;
 
-                    BusinessPremium = BusinessBaserate * AdjustLimitFactor * ExposureUnits;
+                        float AdjustLimitFactor = LimitFactor - DeductibleFactor;
 
-                    TotalPremium += BusinessPremium;
+                        BusinessPremium = BusinessBaserate * AdjustLimitFactor * ExposureUnits;
+
+                        TotalPremium += BusinessPremium;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw new DatabaseException("Unable To Calculate Premium , Issue with XML File ");
+                    }
 
                     coverage.CoveragePremium = Math.Round(BusinessPremium,2);
 
@@ -137,7 +174,12 @@ namespace QuoteSystemBusiness
 
                 }
                 quote.Premium = Math.Round(TotalPremium,2);
-                QuoteDataAccess.UpdateQuote(quote);
+                string response = QuoteDataAccess.UpdateQuote(quote);
+
+                if(response != "Successfully Updated")
+                {
+                    return "Quote Details Not Found In Database , Please Pass Valid Quote Details";
+                }
             }
             catch (Exception)
             {
@@ -145,7 +187,7 @@ namespace QuoteSystemBusiness
                 throw new DatabaseException("Something Went Wrong");
             }
 
-            return TotalPremium;
+            return "Successfully Calculated Premium";
 
         }
 

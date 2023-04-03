@@ -16,18 +16,27 @@ namespace QuoteSystemDataAccess
             year = year.Substring(year.Length - 2);
 
             string LastQuoteNumber;
+            string NewQuoteNumber;
 
-            using(var dbContext = new QuoteDataModelContainer())
+            try
             {
-                Quote quote = dbContext.Quotes.OrderByDescending(e => e.Id).First();
-                LastQuoteNumber = quote.QuoteNumber;
+                using (var dbContext = new QuoteDataModelContainer())
+                {
+                    Quote quote = dbContext.Quotes.OrderByDescending(e => e.Id).First();
+                    LastQuoteNumber = quote.QuoteNumber;
+                }
+                var LastQuoteList = LastQuoteNumber.Split('-');
+
+                int LastQuoteNum = Convert.ToInt32(LastQuoteList[1]);
+                LastQuoteNum += 1;
+
+                NewQuoteNumber = "Q" + year + "CGL" + "-" + LastQuoteNum.ToString().PadLeft(4, '0');
             }
-            var LastQuoteList = LastQuoteNumber.Split('-');
+            catch (Exception)
+            {
 
-            int LastQuoteNum = Convert.ToInt32(LastQuoteList[1]);
-            LastQuoteNum += 1;
-
-            string NewQuoteNumber = "Q" + year + "CGL" + "-"+ LastQuoteNum.ToString().PadLeft(4, '0');
+                throw new DatabaseException("Unable To Generate Quote Number");
+            }
             
 
             return NewQuoteNumber;
@@ -198,6 +207,7 @@ namespace QuoteSystemDataAccess
 
                             OldQuote.Premium = UpdatedQuote.Premium;
                             OldQuote.RiskState = UpdatedQuote.RiskState;
+                            OldQuote.AgentId = UpdatedQuote.AgentId;
 
                             OldQuote.Prospect.Contact = UpdatedQuote.Prospect.Contact;
                             OldQuote.Prospect.Email = UpdatedQuote.Prospect.Email;

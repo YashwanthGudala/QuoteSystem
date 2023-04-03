@@ -33,7 +33,7 @@ namespace QuoteSystemBusinessTest
 
             Quote quote = GetSampleQuote();
             
-            float res = RatingEngine.RateQuote(quote);
+            string res = RatingEngine.RateQuote(quote);
 
             Console.WriteLine("Premium = " +res);
 
