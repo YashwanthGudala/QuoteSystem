@@ -6,10 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using QuoteSystemDataModel;
 using QuoteSystemDataAccess;
+using QuoteSystemAPIServices.Filters;
 
 namespace QuoteSystemAPIServices.Controllers
 {
-    
+    [QuoteServicesFilter]
     public class QuoteServiceController : ApiController
     {
         [HttpGet]

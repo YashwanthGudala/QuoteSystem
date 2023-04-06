@@ -169,6 +169,9 @@
     <Compile Include="Controllers\QuoteServiceController.cs" />
     <Compile Include="Controllers\RateServiceController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Filters\MetadataServiesFilter.cs" />
+    <Compile Include="Filters\QuoteServicesFilter.cs" />
+    <Compile Include="Filters\RateServicesFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

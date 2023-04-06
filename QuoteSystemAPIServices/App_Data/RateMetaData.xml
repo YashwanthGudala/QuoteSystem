@@ -1,0 +1,236 @@
+<?xml version="1.0" ?>
+<RateMetaData>
+<RateTables>
+<RateTable>
+<Name>Deductible Factor</Name>
+<RateRow>
+<RateKeys>
+<RateKey> <KeyName>Deductible Amount</KeyName> <KeyValue>250</KeyValue></RateKey>
+<RateKey><KeyName>Deductible Type</KeyName><KeyValue>BI</KeyValue></RateKey>
+</RateKeys>
+<RateFactor> <FactorName>Deductible Factor</FactorName> <FactorValue>0.007</FactorValue> </RateFactor>
+</RateRow>
+<RateRow>
+<RateKeys>
+<RateKey> <KeyName>Deductible Amount</KeyName> <KeyValue>250</KeyValue>  </RateKey>
+<RateKey><KeyName>Deductible Type</KeyName><KeyValue>PD</KeyValue> </RateKey>
+</RateKeys>
+<RateFactor> <FactorName>Deductible Factor</FactorName> <FactorValue>0.005</FactorValue></RateFactor>
+</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey>
+				<KeyName>Deductible Amount</KeyName>
+				<KeyValue>5000</KeyValue>
+			</RateKey>
+			<RateKey>
+				<KeyName>Deductible Type</KeyName>
+				<KeyValue>BI</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Deductible Factor</FactorName>
+			<FactorValue>0.06</FactorValue>
+		</RateFactor>
+	</RateRow>
+	<RateRow>
+		<RateKeys>
+			<RateKey>
+				<KeyName>Deductible Amount</KeyName>
+				<KeyValue>10000</KeyValue>
+			</RateKey>
+			<RateKey>
+				<KeyName>Deductible Type</KeyName>
+				<KeyValue>BI</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Deductible Factor</FactorName>
+			<FactorValue>0.064</FactorValue>
+		</RateFactor>
+	</RateRow>
+</RateTable>
+	
+<RateTable>
+<Name>Limit Factor</Name>
+<RateRow>
+<RateKeys>
+<RateKey > <KeyName>Occurence Limit</KeyName> <KeyValue>25000</KeyValue>   </RateKey>
+<RateKey > <KeyName>Aggreagte Limit</KeyName> <KeyValue>50000</KeyValue></RateKey>
+</RateKeys>
+<RateFactor> <FactorName>Limit Factor</FactorName> <FactorValue>0.71</FactorValue> </RateFactor>
+</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey >
+				<KeyName>Occurence Limit</KeyName>
+				<KeyValue>25000</KeyValue>
+			</RateKey>
+			<RateKey >
+				<KeyName>Aggreagte Limit</KeyName>
+				<KeyValue>100000</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Limit Factor</FactorName>
+			<FactorValue>0.72</FactorValue>
+		</RateFactor>
+	</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey >
+				<KeyName>Occurence Limit</KeyName>
+				<KeyValue>50000</KeyValue>
+			</RateKey>
+			<RateKey >
+				<KeyName>Aggreagte Limit</KeyName>
+				<KeyValue>100000</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Limit Factor</FactorName>
+			<FactorValue>0.84</FactorValue>
+		</RateFactor>
+	</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey >
+				<KeyName>Occurence Limit</KeyName>
+				<KeyValue>100000</KeyValue>
+			</RateKey>
+			<RateKey >
+				<KeyName>Aggreagte Limit</KeyName>
+				<KeyValue>200000</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Limit Factor</FactorName>
+			<FactorValue>1</FactorValue>
+		</RateFactor>
+	</RateRow>
+</RateTable>
+	
+<RateTable>
+<Name>Premises Operations Loss Cost</Name>
+<RateRow>
+<RateKeys>
+<RateKey>  <KeyName>Class Code</KeyName> <KeyValue>27025</KeyValue>    </RateKey>
+<RateKey>  <KeyName>Territory</KeyName> <KeyValue>001</KeyValue>    </RateKey>
+</RateKeys>
+<RateFactor> <FactorName>Base Rate</FactorName> <FactorValue>55.3</FactorValue> </RateFactor>
+</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey>
+				<KeyName>Class Code</KeyName>
+				<KeyValue>27025</KeyValue>
+			</RateKey>
+			<RateKey>
+				<KeyName>Territory</KeyName>
+				<KeyValue>002</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Base Rate</FactorName>
+			<FactorValue>47.05</FactorValue>
+		</RateFactor>
+	</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey>
+				<KeyName>Class Code</KeyName>
+				<KeyValue>27160</KeyValue>
+			</RateKey>
+			<RateKey>
+				<KeyName>Territory</KeyName>
+				<KeyValue>001</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Base Rate</FactorName>
+			<FactorValue>35.02</FactorValue>
+		</RateFactor>
+	</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey>
+				<KeyName>Class Code</KeyName>
+				<KeyValue>27160</KeyValue>
+			</RateKey>
+			<RateKey>
+				<KeyName>Territory</KeyName>
+				<KeyValue>002</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Base Rate</FactorName>
+			<FactorValue>29.8</FactorValue>
+		</RateFactor>
+	</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey>
+				<KeyName>Class Code</KeyName>
+				<KeyValue>35735</KeyValue>
+			</RateKey>
+			<RateKey>
+				<KeyName>Territory</KeyName>
+				<KeyValue>001</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Base Rate</FactorName>
+			<FactorValue>0.99</FactorValue>
+		</RateFactor>
+	</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey>
+				<KeyName>Class Code</KeyName>
+				<KeyValue>35735</KeyValue>
+			</RateKey>
+			<RateKey>
+				<KeyName>Territory</KeyName>
+				<KeyValue>002</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Base Rate</FactorName>
+			<FactorValue>0.76</FactorValue>
+		</RateFactor>
+	</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey>
+				<KeyName>Class Code</KeyName>
+				<KeyValue>46530</KeyValue>
+			</RateKey>
+			<RateKey>
+				<KeyName>Territory</KeyName>
+				<KeyValue>001</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Base Rate</FactorName>
+			<FactorValue>0.25</FactorValue>
+		</RateFactor>
+	</RateRow>
+<RateRow>
+		<RateKeys>
+			<RateKey>
+				<KeyName>Class Code</KeyName>
+				<KeyValue>46530</KeyValue>
+			</RateKey>
+			<RateKey>
+				<KeyName>Territory</KeyName>
+				<KeyValue>002</KeyValue>
+			</RateKey>
+		</RateKeys>
+		<RateFactor>
+			<FactorName>Base Rate</FactorName>
+			<FactorValue>0.222</FactorValue>
+		</RateFactor>
+	</RateRow>
+</RateTable>
+</RateTables>
+</RateMetaData>

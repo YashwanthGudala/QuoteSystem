@@ -6,8 +6,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using QuoteSystemDataAccess;
+using QuoteSystemAPIServices.Filters;
+
 namespace QuoteSystemAPIServices.Controllers
 {
+    [MetadataServiesFilter]
     public class MetadataServiceController : ApiController
     {
         [HttpGet]

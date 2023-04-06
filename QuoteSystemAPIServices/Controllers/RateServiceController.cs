@@ -6,9 +6,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using QuoteSystemBusiness;
+using QuoteSystemAPIServices.Filters;
 
 namespace QuoteSystemAPIServices.Controllers
 {
+    [RateServicesFilter]
     public class RateServiceController : ApiController
     {
         [HttpPost]
