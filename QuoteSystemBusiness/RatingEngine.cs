@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using QuoteSystemDataModel;
 using QuoteSystemDataAccess;
+using log4net;
 
 namespace QuoteSystemBusiness
 {
     public class RatingEngine
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static string BaserateTable = "Premises Operations Loss Cost";
         private static string LimitFactorTable = "Limit Factor";
         private static string DeductibleFactorTable = "Deductible Factor";
@@ -30,38 +32,15 @@ namespace QuoteSystemBusiness
                 {
                     metaData = (RateMetaData)xmlserializer.Deserialize(streamReader);
                 }
-            }
-            catch (Exception)
-            {
 
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable To Fetch Data From XML File");
             }
 
-
-        }
-        public static void DisplayAllTables()
-        {
-            LoadMetaData();
-
-            foreach (var ratetable in metaData.RateTables.RateTable.ToList())
-            {
-                //name
-                Console.WriteLine(ratetable.Name);
-
-                //rate rows
-                foreach (var raterow in ratetable.RateRow.ToList())
-                {
-                    //rate keys
-                    foreach (var ratekey in raterow.RateKeys.RateKey.ToList())
-                    {
-                        Console.WriteLine(ratekey.KeyName + "--->" + ratekey.KeyValue);
-                    }
-
-                    //rate value
-                    Console.WriteLine(raterow.RateFactor.FactorName + "--->" + raterow.RateFactor.FactorValue);
-                }
-            }
-
+            log.Info("Fetched Metadata From XML File");
         }
 
         public static float LookupRate(string TableName, params string[] inputratekeys)
@@ -108,14 +87,14 @@ namespace QuoteSystemBusiness
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable To Fetch From XML File");
             }
 
 
-
+            log.Info("Fetch Rate Factor From Rate table : " + TableName);
             return result;
 
 
@@ -181,12 +160,13 @@ namespace QuoteSystemBusiness
                     return "Quote Details Not Found In Database , Please Pass Valid Quote Details";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                log.Error(ex.Message);
                 throw new DatabaseException("Something Went Wrong");
             }
 
+            log.Info("Calculated Premium For Quote Number : " + quote.QuoteNumber);
             return "Successfully Calculated Premium";
 
         }

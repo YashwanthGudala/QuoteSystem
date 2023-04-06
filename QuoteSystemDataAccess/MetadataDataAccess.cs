@@ -7,11 +7,12 @@ using QuoteSystemDataModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
-
+using log4net;
 namespace QuoteSystemDataAccess
 {
     public class MetadataDataAccess
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static string AddCodeValue(string ListName, CodeValue codevalue)
         {
 
@@ -36,11 +37,14 @@ namespace QuoteSystemDataAccess
                     }
                     codevaluelist.CodeValues.Add(codevalue);
                     dbContext.SaveChanges();
+
+                    log.Info("Added New Code Value To List : " + ListName);
                     return "Successfully Added";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable to Add New CodeValue to Existing List");
             }
         }
@@ -66,10 +70,12 @@ namespace QuoteSystemDataAccess
                     dbContext.CodeValueLists.Add(CodeList);
                     dbContext.SaveChanges();
                 }
+                log.Info("Added New Code Value List : " + ListName);
                 return "Successfully Added";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable to Add New CodeValueList to DataBase");
             }
         }
@@ -101,10 +107,12 @@ namespace QuoteSystemDataAccess
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable to Fetch code value ");
             }
+            log.Info("Fetched Code Values of List : " + ListName);
             return CodeValues;
         }
         public static string GetValueFromCode(String ListName, string Key)
@@ -141,14 +149,16 @@ namespace QuoteSystemDataAccess
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable to Fetch Value From Database");
             }
             if (value == "")
             {
                 return "Code Value Pair Not Found";
             }
+            log.Info("Fetched Value of Code : " + Key + "From List : " + ListName);
             return value;
         }
         public static List<CodeValueList> GetAllCodeValueLists()
@@ -162,10 +172,12 @@ namespace QuoteSystemDataAccess
                     codeValueLists = dbContext.CodeValueLists.ToList();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable to Load All Codevalues");
             }
+            log.Info("Fetched All Code Value Lists");
             return codeValueLists;
         }
         public static string DeleteCodeValueList(string ListName)
@@ -194,13 +206,13 @@ namespace QuoteSystemDataAccess
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable to Delete Code Value List");
             }
-
+            log.Info("Deleted Code Value List : " + ListName);
             return "Deleted Successfully";
 
         }
@@ -239,8 +251,9 @@ namespace QuoteSystemDataAccess
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable to delete codevalue");
             }
 
@@ -248,22 +261,10 @@ namespace QuoteSystemDataAccess
             {
                 return "Unable to fetch the code";
             }
-
+            log.Info("Deleted a Code Value of Key : " + Code + "From List : " + ListName);
             return "Succesfully deleted";
+
         }
-
-        //public static string LoadCodeValuePairsFromJsonFile()
-        //{
-        //    string FileLocation = @"Assets/USStates.json";
-
-        //    string text =
-
-        //    JObject o1 = JObject.Parse(File.ReadAllText(@"c:\data.json"));
-
-
-
-
-        //}
 
     }
 }

@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QuoteSystemDataModel;
-
+using log4net;
 namespace QuoteSystemDataAccess
 {
     public class QuoteDataAccess
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static string GenerateQuoteNumber()
         {
             string year = DateTime.Now.Year.ToString();
@@ -32,13 +33,14 @@ namespace QuoteSystemDataAccess
 
                 NewQuoteNumber = "Q" + year + "CGL" + "-" + LastQuoteNum.ToString().PadLeft(4, '0');
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex.Message);
 
                 throw new DatabaseException("Unable To Generate Quote Number");
             }
-            
 
+            log.Info("Generated New Quote Number : " + NewQuoteNumber);
             return NewQuoteNumber;
 
         }
@@ -63,12 +65,13 @@ namespace QuoteSystemDataAccess
                     dbContext.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable To Add New Quote To Database");
             }
+            log.Info("Added New Quote With Quote Number : " + quote.QuoteNumber);
             return "Successfully Added";
 
 
@@ -89,11 +92,13 @@ namespace QuoteSystemDataAccess
                         .Where(Q => Q.QuoteNumber == QuoteNumber).FirstOrDefault<Quote>();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex.Message);
 
                 throw new DatabaseException("Unable To Fetch the Quote From Database");
             }
+            log.Info("Viewed Quote Details of Quote Number : " + QuoteNumber);
             return quote;
         }
         public static List<Quote> ViewAllQuote()
@@ -111,12 +116,15 @@ namespace QuoteSystemDataAccess
                              .Include("Prospect.Businesses.Coverages")
                              .ToList<Quote>();
                 }
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex.Message);
 
                 throw new DatabaseException("Unable To Fetch Quotes From Database");
             }
+            log.Info("Viewed All Quote Details");
             return Quotes;
         }
 
@@ -168,12 +176,13 @@ namespace QuoteSystemDataAccess
                     dbContext.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable to Delete Quote From Database");
             }
 
+            log.Info("Deleted Quote With Quote Number : " + quotenum);
             return "Successfully Deleted";
 
 
@@ -247,11 +256,12 @@ namespace QuoteSystemDataAccess
 
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                log.Error(ex.Message);
                 throw new DatabaseException("Unable to Update Quote , Something Went Wrong");
             }
+            log.Info("Updated Quote Details of Quote Number : " + UpdatedQuote.QuoteNumber);
             return "Successfully Updated";
 
         }
