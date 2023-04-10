@@ -10,7 +10,7 @@ using QuoteSystemAPIServices.Filters;
 
 namespace QuoteSystemAPIServices.Controllers
 {
-    [MetadataServiesFilter]
+    [MetadataServicesFilter]
     public class MetadataServiceController : ApiController
     {
         [HttpGet]

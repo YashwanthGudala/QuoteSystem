@@ -25,10 +25,10 @@ namespace QuoteSystemDataAccessTest
             //TestQuoteDataAccess.RemoveQuoteTest();
 
 
-            TestQuoteDataAccess.ViewQuoteTest();
+            //TestQuoteDataAccess.ViewQuoteTest();
             //Console.ReadKey();
 
-            TestQuoteDataAccess.ViewAllQuoteTest();
+            //TestQuoteDataAccess.ViewAllQuoteTest();
 
 
             //TestQuoteDataAccess.UpdateQuoteTest();
@@ -47,9 +47,12 @@ namespace QuoteSystemDataAccessTest
             //TestBusinessDataAccess.RemoveBusinessTest();
             //TestBusinessDataAccess.ViewBusinessTest();
             //TestBusinessDataAccess.ViewAllBusinessTest();
-           // TestBusinessDataAccess.UpdateBusinessTest();
+            // TestBusinessDataAccess.UpdateBusinessTest();
 
-            Console.ReadLine();
+            //Console.ReadLine();
+
+            //TestAgentDataAccess.AddAgentTest();
+            TestAgentDataAccess.VerifyAgentTest();
 
 
         }

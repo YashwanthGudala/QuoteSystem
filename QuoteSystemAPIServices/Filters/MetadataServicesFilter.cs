@@ -9,7 +9,7 @@ using System.Web.Http.Filters;
 
 namespace QuoteSystemAPIServices.Filters
 {
-    public class MetadataServiesFilter : ActionFilterAttribute
+    public class MetadataServicesFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
