@@ -81,6 +81,11 @@ namespace QuoteSystemDataAccess
         }
         public static List<CodeValue> GetCodeValuesByListName(string ListName)
         {
+            if(ListName == null)
+            {
+                throw new DatabaseException("List name is Mandatory");
+            }
+            
             CodeValueList codevaluelist;
             List<CodeValue> CodeValues = new List<CodeValue>();
 
@@ -124,6 +129,10 @@ namespace QuoteSystemDataAccess
             if (ListName.Length == 0)
             {
                 return "ListName is mandatory";
+            }
+            if(Key.Length == 0)
+            {
+                return "Key is mandatory";
             }
 
             try

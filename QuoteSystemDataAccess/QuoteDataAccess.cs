@@ -48,7 +48,7 @@ namespace QuoteSystemDataAccess
         {
             if (quote == null)
             {
-                return "Unable to add Null Quote ";
+                return "Unable to add Null Quote";
             }
             try
             {
@@ -78,6 +78,7 @@ namespace QuoteSystemDataAccess
         }
         public static Quote ViewQuote(string QuoteNumber)
         {
+            
             Quote quote;
             try
             {
@@ -128,8 +129,13 @@ namespace QuoteSystemDataAccess
             return Quotes;
         }
 
-        public static string DeleteQuote(string quotenum)
+        public static string DeleteQuote(string QuoteNumber)
         {
+            if(QuoteNumber.Length == 0)
+            {
+                return "Quote Number is Mandatory";
+            }
+            
             try
             {
                 using (var dbContext = new QuoteDataModelContainer())
@@ -140,7 +146,7 @@ namespace QuoteSystemDataAccess
                         .Include("Prospect.Businesses")
                         .Include("Prospect.Businesses.Address")
                         .Include("Prospect.Businesses.Coverages")
-                        .Where(c => c.QuoteNumber == quotenum)
+                        .Where(c => c.QuoteNumber == QuoteNumber)
                         .FirstOrDefault();
 
                     if (quote != null)
@@ -182,7 +188,7 @@ namespace QuoteSystemDataAccess
                 throw new DatabaseException("Unable to Delete Quote From Database");
             }
 
-            log.Info("Deleted Quote With Quote Number : " + quotenum);
+            log.Info("Deleted Quote With Quote Number : " + QuoteNumber);
             return "Successfully Deleted";
 
 
@@ -209,7 +215,7 @@ namespace QuoteSystemDataAccess
 
                     if (OldQuote != null)
                     {
-                        if (OldQuote.Prospect != null)
+                        if (OldQuote.Prospect != null && UpdatedQuote.Prospect != null)
                         {
                             OldQuote.PolicyTerm.PolicyEffectiveDate = UpdatedQuote.PolicyTerm.PolicyEffectiveDate;
                             OldQuote.PolicyTerm.PolicyExpiryDate = UpdatedQuote.PolicyTerm.PolicyExpiryDate;

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteSystemBusinessTest", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteSystemAPIServices", "QuoteSystemAPIServices\QuoteSystemAPIServices.csproj", "{1F89F62E-5CFD-4943-8F7D-45108013EDE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteSystemUnitTest", "QuoteSystemUnitTest\QuoteSystemUnitTest.csproj", "{03CCF569-C8CA-430E-868F-B75F9FA11F82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{1F89F62E-5CFD-4943-8F7D-45108013EDE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F89F62E-5CFD-4943-8F7D-45108013EDE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F89F62E-5CFD-4943-8F7D-45108013EDE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03CCF569-C8CA-430E-868F-B75F9FA11F82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03CCF569-C8CA-430E-868F-B75F9FA11F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03CCF569-C8CA-430E-868F-B75F9FA11F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03CCF569-C8CA-430E-868F-B75F9FA11F82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
