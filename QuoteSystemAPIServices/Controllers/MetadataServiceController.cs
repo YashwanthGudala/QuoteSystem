@@ -32,5 +32,26 @@ namespace QuoteSystemAPIServices.Controllers
 
             return response;
         }
+
+        [HttpGet]
+        [Route("api/MetadataServices/GetAllCodeValueLists")]
+        public List<CodeValueList> GetAllCodeValueLists()
+        {
+            List<CodeValueList> codeValueLists = MetadataDataAccess.GetAllCodeValueLists();
+
+            return codeValueLists;
+        }
+
+
+
+
+        [HttpPost]
+        [Route("api/MetadataServices/AddCodeValueLists")]
+        public string GetValueFromCode(List<CodeValueList> codeValueLists)
+        {
+            string response = MetadataDataAccess.AddCodeValueLists(codeValueLists);
+
+            return response;
+        }
     }
 }

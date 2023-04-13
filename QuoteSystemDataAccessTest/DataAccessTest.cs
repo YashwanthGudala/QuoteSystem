@@ -15,7 +15,7 @@ namespace QuoteSystemDataAccessTest
             //Testing add quote
             Console.ReadKey();
 
-            //TestQuoteDataAccess.AddQuoteTest();
+            TestQuoteDataAccess.AddQuoteTest();
 
 
             //TestQuoteDataAccess.AddQuoteTest();
@@ -52,7 +52,7 @@ namespace QuoteSystemDataAccessTest
             //Console.ReadLine();
 
             //TestAgentDataAccess.AddAgentTest();
-            TestAgentDataAccess.VerifyAgentTest();
+            //TestAgentDataAccess.VerifyAgentTest();
 
 
         }

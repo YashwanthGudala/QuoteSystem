@@ -178,7 +178,7 @@ namespace QuoteSystemDataAccess
 
                 using (var dbContext = new QuoteDataModelContainer())
                 {
-                    codeValueLists = dbContext.CodeValueLists.ToList();
+                    codeValueLists = dbContext.CodeValueLists.Include("CodeValues").ToList();
                 }
             }
             catch (Exception ex)
@@ -188,6 +188,45 @@ namespace QuoteSystemDataAccess
             }
             log.Info("Fetched All Code Value Lists");
             return codeValueLists;
+        }
+        public static string AddCodeValueLists(List<CodeValueList> InputCodeValueLists)
+        {
+            List<CodeValueList> codeValueLists;
+            try
+            {
+                using (var dbContext = new QuoteDataModelContainer())
+                {
+                    codeValueLists = dbContext.CodeValueLists.ToList();
+
+                    foreach (var CodeList in InputCodeValueLists)
+                    {
+                        AddCodeValueList(CodeList.ListName);
+
+                        foreach (var CodeValuePair in CodeList.CodeValues.ToList())
+                        {
+                            CodeValue codeValue = new CodeValue()
+                            {
+                                Code = CodeValuePair.Code,
+                                Value = CodeValuePair.Value
+                            };
+                            AddCodeValue(CodeList.ListName, codeValue);
+
+                        }
+
+                    }
+                    dbContext.SaveChanges();
+
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                throw new DatabaseException("Unable to Add Code Value Lists");
+            }
+            log.Info("Added New Code Value Lists");
+            return "Successfully Added Code Value Lists";
         }
         public static string DeleteCodeValueList(string ListName)
         {

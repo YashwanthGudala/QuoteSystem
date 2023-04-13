@@ -291,7 +291,7 @@ namespace QuoteSystemDataAccessTest
 
             Quote quote = new Quote()
             {
-                QuoteNumber = "",
+                QuoteNumber = "Q2",
                 RiskState = "Kansas",
                 Premium = 0d,
                 AgentId = "A002",
@@ -327,7 +327,8 @@ namespace QuoteSystemDataAccessTest
         }
         public static void UpdateQuoteTest()
         {
-            Quote quote = GetSampleUpdateQuote();
+            Quote quote = GetSampleRatingQuote();
+            
 
             string res = QuoteSystemDataAccess.QuoteDataAccess.UpdateQuote(quote);
 
